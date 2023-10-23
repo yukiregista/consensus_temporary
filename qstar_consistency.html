@@ -7507,6 +7507,47 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Q*-consistency">Q* consistency<a class="anchor-link" href="#Q*-consistency">¶</a></h2><p>Consistency of R* consensus is investigated by Degnan et al. The exact same argument can be used.</p>
+<p>The following theorem is the basic property.</p>
+<p><strong>Theorem</strong>
+Let $T$ be the “true” <strong>binary</strong> tree, and let $P$ be a distribution of trees with the same leaf set.
+Suppose that $P$ has the following property:
+(<em>) For any quartets $ab\mid cd$, $P(ab\mid cd \in T) &gt; \max\{ P(ac\mid bd \in T), P(ad\mid bc \in T)\}$
+Then, Q</em> consensus tree constructed from an independent sample $X$ is consistent.</p>
+<p>**********Proof**********</p>
+<p>The proof is essentially the same with the proof of Theorem 3 in Degnan et al. (2009).</p>
+<p>Take $\varepsilon&gt;0$ arbitrarily and let $X_1, \ldots, X_n$ denote a sample of size $n$.
+Because the number of quartets is finite, we can take $n$ sufficiently large such that with probability greater than $1-\varepsilon$, for all quartets $ab\mid cd\in T$, $P_n(ab\mid cd) &gt; \max\{ P_n(ac\mid bd \in T), P_n(ad\mid bc \in T)\}$. Here, $P_n$ denotes the empirical measure. Then for the sample with this probability, Q* recovers the true topology.</p>
+<hr/>
+<p>Note that the above argument is only applicable to the binary case.</p>
+<p>Now the question of whether Q* is consistent under different configurations just comes down to asking if the distribution $P$ where sample is drawn satisfies the condition (*).</p>
+<p>💡 <strong>It would be interesting to see in simulation if the condition (*) is satisfied for bootstrap trees.</strong></p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h2 id="Q*-mode-consistency">Q* mode consistency<a class="anchor-link" href="#Q*-mode-consistency">¶</a></h2><p>Suppose that gene trees $T_1, \ldots, T_n$ are obtained by multi-species coalescent model (branch lengths are in coalescent units).</p>
+<p>💡 Q(A). Does the subtree of gene trees also follow multispecies coalescent?
+By using a suitable time scaling (coalescent units?), can each branch’s population size be assumed as the same?</p>
+<p>💡 We can casually check this assumption using simulation with dendropy or inspecting the code.</p>
+<p>If A holds, then for a fixed subset of taxa, the subtree of gene trees restricted to this subset also follows the multispecies coalescent with the same pop size for each edge.</p>
+<p>Let $q$ be an arbitrary quartet of taxa and let $T_1^{(q)}, \ldots, T_n^{(q)}$ be the subtrees restricted to $q$. Since pop size is fixed and they are independent sample from the same coalescent process, the mode estimator consistently estimates the correct phylogeny w.r.t. its topology and one (and only) internal edge length. Thus, in particular, for any $\delta, \varepsilon&gt;0$, there exists $N\in\mathbb{N}$ such that if $n\geq N^{(q)}$, with probability greater than $1-\frac{\varepsilon}{\binom{m}{4}}$, the distance (in BHV) between the mode estimator and true subtree can be made less than $\delta$. Because we only have a finite number of quartets, by suitably choosing large $N$, if $n\geq N$, with probability greater than $1-\varepsilon$, the maximum distance between each mode estimator and true subtree is less than $\delta$. This shows the weak consistency of Q* mode consensus.</p>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h4 id="Some-codes-(you-can-skip)">Some codes (you can skip)<a class="anchor-link" href="#Some-codes-(you-can-skip)">¶</a></h4>
 </div>
 </div>
