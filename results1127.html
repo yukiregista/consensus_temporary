@@ -7721,12 +7721,15 @@ $d_{sd, \alpha}(T, \hat{T}) = \alpha e(T, \hat{T}) + (1-\alpha) e(\hat{T}, T)$, 
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Estimated by HKY + gamma</span>
 <span class="n">cm</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s2">"vlag"</span><span class="p">,</span> <span class="n">as_cmap</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">cm2</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s2">"vlag_r"</span><span class="p">,</span> <span class="n">as_cmap</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">column_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"fp"</span><span class="p">,</span> <span class="s2">"fn"</span><span class="p">,</span> <span class="s2">"sd"</span><span class="p">,</span> <span class="s2">"fp_tbe"</span><span class="p">,</span> <span class="s2">"fn_tbe"</span><span class="p">,</span> <span class="s2">"std"</span><span class="p">,</span> <span class="s2">"tqdist"</span><span class="p">,</span> <span class="s2">"quartet_fp"</span><span class="p">,</span> <span class="s2">"symmetric_qdist"</span><span class="p">,</span> <span class="s2">"branch_resolution"</span><span class="p">,</span> <span class="s2">"quartet_resolution"</span><span class="p">]</span>
 <span class="n">group_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Symmetric difference"</span><span class="p">]</span><span class="o">*</span><span class="mi">3</span> <span class="o">+</span> <span class="p">[</span><span class="s2">"Transfer distance"</span><span class="p">]</span><span class="o">*</span><span class="mi">3</span> <span class="o">+</span> <span class="p">[</span><span class="s2">"Quartet distance"</span><span class="p">]</span><span class="o">*</span><span class="mi">3</span> <span class="o">+</span> <span class="p">[</span><span class="s2">"Resolution"</span><span class="p">]</span><span class="o">*</span><span class="mi">2</span>
 <span class="n">res</span> <span class="o">=</span> <span class="n">result_dict</span><span class="p">[</span><span class="s1">'tree1-0.5'</span><span class="p">][</span><span class="s1">'HKY0.5'</span><span class="p">][</span><span class="mi">100</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="s2">"maj_GTRgamma"</span><span class="p">,</span> <span class="s2">"rstar_GTRgamma_S1"</span><span class="p">,</span> <span class="s2">"MAP_GTRgamma"</span><span class="p">,</span> <span class="s2">"ASTRAL_GTRgamma"</span><span class="p">,</span> <span class="s2">"ASTRALW_GTRgamma"</span><span class="p">],</span> <span class="n">column_list</span><span class="p">]</span>
 <span class="n">column_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">column_list</span><span class="p">,</span><span class="n">group_list</span><span class="p">))</span>
 <span class="n">res</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="o">.</span><span class="n">from_tuples</span><span class="p">([</span><span class="o">*</span><span class="nb">zip</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">column_dict</span><span class="o">.</span><span class="n">get</span><span class="p">,</span> <span class="n">res</span><span class="p">),</span> <span class="n">res</span><span class="p">)])</span>
-<span class="n">res</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">background_gradient</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="p">)</span><span class="o">.</span><span class="n">set_table_styles</span><span class="p">([{</span>
+<span class="n">columnA</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">columns</span><span class="p">[:</span><span class="mi">9</span><span class="p">]</span>
+<span class="n">columnB</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">9</span><span class="p">:</span><span class="mi">11</span><span class="p">]</span>
+<span class="n">res</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">background_gradient</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="p">,</span> <span class="n">subset</span><span class="o">=</span><span class="n">columnA</span><span class="p">)</span><span class="o">.</span><span class="n">background_gradient</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="n">cm2</span><span class="p">,</span> <span class="n">subset</span><span class="o">=</span><span class="n">columnB</span><span class="p">)</span><span class="o">.</span><span class="n">set_table_styles</span><span class="p">([{</span>
     <span class="s1">'selector'</span><span class="p">:</span> <span class="s1">'thead th'</span><span class="p">,</span>
     <span class="s1">'props'</span><span class="p">:</span> <span class="p">[(</span><span class="s1">'text-align'</span><span class="p">,</span> <span class="s1">'center'</span><span class="p">)]</span>
 <span class="p">}])</span>
@@ -7743,200 +7746,200 @@ $d_{sd, \alpha}(T, \hat{T}) = \alpha e(T, \hat{T}) + (1-\alpha) e(\hat{T}, T)$, 
 <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[ ]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <style type="text/css">
-#T_091db thead th {
+#T_812c6 thead th {
   text-align: center;
 }
-#T_091db_row0_col0, #T_091db_row0_col2, #T_091db_row0_col3, #T_091db_row0_col7, #T_091db_row0_col9, #T_091db_row0_col10, #T_091db_row1_col5, #T_091db_row3_col1, #T_091db_row4_col1, #T_091db_row4_col4, #T_091db_row4_col6, #T_091db_row4_col8 {
+#T_812c6_row0_col0, #T_812c6_row0_col2, #T_812c6_row0_col3, #T_812c6_row0_col7, #T_812c6_row1_col5, #T_812c6_row2_col9, #T_812c6_row2_col10, #T_812c6_row3_col1, #T_812c6_row3_col9, #T_812c6_row3_col10, #T_812c6_row4_col1, #T_812c6_row4_col4, #T_812c6_row4_col6, #T_812c6_row4_col8, #T_812c6_row4_col9, #T_812c6_row4_col10 {
   background-color: #2369bd;
   color: #f1f1f1;
 }
-#T_091db_row0_col1, #T_091db_row0_col4, #T_091db_row0_col6, #T_091db_row2_col0, #T_091db_row2_col2, #T_091db_row2_col3, #T_091db_row2_col5, #T_091db_row2_col7, #T_091db_row2_col8, #T_091db_row2_col9, #T_091db_row2_col10, #T_091db_row3_col9, #T_091db_row3_col10, #T_091db_row4_col9, #T_091db_row4_col10 {
+#T_812c6_row0_col1, #T_812c6_row0_col4, #T_812c6_row0_col6, #T_812c6_row0_col9, #T_812c6_row0_col10, #T_812c6_row2_col0, #T_812c6_row2_col2, #T_812c6_row2_col3, #T_812c6_row2_col5, #T_812c6_row2_col7, #T_812c6_row2_col8 {
   background-color: #a9373b;
   color: #f1f1f1;
 }
-#T_091db_row0_col5 {
+#T_812c6_row0_col5 {
   background-color: #6087bd;
   color: #f1f1f1;
 }
-#T_091db_row0_col8 {
+#T_812c6_row0_col8 {
   background-color: #2f6ebc;
   color: #f1f1f1;
 }
-#T_091db_row1_col0 {
+#T_812c6_row1_col0 {
   background-color: #f8f4f5;
   color: #000000;
 }
-#T_091db_row1_col1 {
+#T_812c6_row1_col1 {
   background-color: #7594c0;
   color: #f1f1f1;
 }
-#T_091db_row1_col2 {
+#T_812c6_row1_col2 {
   background-color: #7997c1;
   color: #f1f1f1;
 }
-#T_091db_row1_col3 {
+#T_812c6_row1_col3 {
   background-color: #f1dddb;
   color: #000000;
 }
-#T_091db_row1_col4 {
+#T_812c6_row1_col4 {
   background-color: #678bbe;
   color: #f1f1f1;
 }
-#T_091db_row1_col6 {
+#T_812c6_row1_col6 {
   background-color: #bfc8d8;
   color: #000000;
 }
-#T_091db_row1_col7 {
+#T_812c6_row1_col7 {
   background-color: #e7e7ec;
   color: #000000;
 }
-#T_091db_row1_col8, #T_091db_row3_col5, #T_091db_row4_col5 {
+#T_812c6_row1_col8, #T_812c6_row3_col5, #T_812c6_row4_col5 {
   background-color: #3f75bc;
   color: #f1f1f1;
 }
-#T_091db_row1_col9 {
-  background-color: #d1918e;
+#T_812c6_row1_col9 {
+  background-color: #93a8c8;
   color: #f1f1f1;
 }
-#T_091db_row1_col10 {
-  background-color: #deb1ae;
+#T_812c6_row1_col10 {
+  background-color: #b5c0d4;
   color: #000000;
 }
-#T_091db_row2_col1 {
+#T_812c6_row2_col1 {
   background-color: #c06967;
   color: #f1f1f1;
 }
-#T_091db_row2_col4 {
+#T_812c6_row2_col4 {
   background-color: #d29593;
   color: #f1f1f1;
 }
-#T_091db_row2_col6 {
+#T_812c6_row2_col6 {
   background-color: #ebd0ce;
   color: #000000;
 }
-#T_091db_row3_col0, #T_091db_row4_col0 {
+#T_812c6_row3_col0, #T_812c6_row4_col0 {
   background-color: #e1b9b6;
   color: #000000;
 }
-#T_091db_row3_col2 {
+#T_812c6_row3_col2 {
   background-color: #b0bdd2;
   color: #000000;
 }
-#T_091db_row3_col3, #T_091db_row4_col3 {
+#T_812c6_row3_col3, #T_812c6_row4_col3 {
   background-color: #d9a6a4;
   color: #000000;
 }
-#T_091db_row3_col4, #T_091db_row3_col6, #T_091db_row3_col8 {
+#T_812c6_row3_col4, #T_812c6_row3_col6, #T_812c6_row3_col8 {
   background-color: #266abd;
   color: #f1f1f1;
 }
-#T_091db_row3_col7 {
+#T_812c6_row3_col7 {
   background-color: #e9cbc9;
   color: #000000;
 }
-#T_091db_row4_col2 {
+#T_812c6_row4_col2 {
   background-color: #afbcd1;
   color: #000000;
 }
-#T_091db_row4_col7 {
+#T_812c6_row4_col7 {
   background-color: #eacdcb;
   color: #000000;
 }
 </style>
-<table id="T_091db">
+<table id="T_812c6">
 <thead>
 <tr>
 <th class="blank level0"> </th>
-<th class="col_heading level0 col0" colspan="3" id="T_091db_level0_col0">Symmetric difference</th>
-<th class="col_heading level0 col3" colspan="3" id="T_091db_level0_col3">Transfer distance</th>
-<th class="col_heading level0 col6" colspan="3" id="T_091db_level0_col6">Quartet distance</th>
-<th class="col_heading level0 col9" colspan="2" id="T_091db_level0_col9">Resolution</th>
+<th class="col_heading level0 col0" colspan="3" id="T_812c6_level0_col0">Symmetric difference</th>
+<th class="col_heading level0 col3" colspan="3" id="T_812c6_level0_col3">Transfer distance</th>
+<th class="col_heading level0 col6" colspan="3" id="T_812c6_level0_col6">Quartet distance</th>
+<th class="col_heading level0 col9" colspan="2" id="T_812c6_level0_col9">Resolution</th>
 </tr>
 <tr>
 <th class="blank level1"> </th>
-<th class="col_heading level1 col0" id="T_091db_level1_col0">fp</th>
-<th class="col_heading level1 col1" id="T_091db_level1_col1">fn</th>
-<th class="col_heading level1 col2" id="T_091db_level1_col2">sd</th>
-<th class="col_heading level1 col3" id="T_091db_level1_col3">fp_tbe</th>
-<th class="col_heading level1 col4" id="T_091db_level1_col4">fn_tbe</th>
-<th class="col_heading level1 col5" id="T_091db_level1_col5">std</th>
-<th class="col_heading level1 col6" id="T_091db_level1_col6">tqdist</th>
-<th class="col_heading level1 col7" id="T_091db_level1_col7">quartet_fp</th>
-<th class="col_heading level1 col8" id="T_091db_level1_col8">symmetric_qdist</th>
-<th class="col_heading level1 col9" id="T_091db_level1_col9">branch_resolution</th>
-<th class="col_heading level1 col10" id="T_091db_level1_col10">quartet_resolution</th>
+<th class="col_heading level1 col0" id="T_812c6_level1_col0">fp</th>
+<th class="col_heading level1 col1" id="T_812c6_level1_col1">fn</th>
+<th class="col_heading level1 col2" id="T_812c6_level1_col2">sd</th>
+<th class="col_heading level1 col3" id="T_812c6_level1_col3">fp_tbe</th>
+<th class="col_heading level1 col4" id="T_812c6_level1_col4">fn_tbe</th>
+<th class="col_heading level1 col5" id="T_812c6_level1_col5">std</th>
+<th class="col_heading level1 col6" id="T_812c6_level1_col6">tqdist</th>
+<th class="col_heading level1 col7" id="T_812c6_level1_col7">quartet_fp</th>
+<th class="col_heading level1 col8" id="T_812c6_level1_col8">symmetric_qdist</th>
+<th class="col_heading level1 col9" id="T_812c6_level1_col9">branch_resolution</th>
+<th class="col_heading level1 col10" id="T_812c6_level1_col10">quartet_resolution</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<th class="row_heading level0 row0" id="T_091db_level0_row0">maj_GTRgamma</th>
-<td class="data row0 col0" id="T_091db_row0_col0">6.330000</td>
-<td class="data row0 col1" id="T_091db_row0_col1">36.210000</td>
-<td class="data row0 col2" id="T_091db_row0_col2">42.540000</td>
-<td class="data row0 col3" id="T_091db_row0_col3">3.641547</td>
-<td class="data row0 col4" id="T_091db_row0_col4">22.789228</td>
-<td class="data row0 col5" id="T_091db_row0_col5">26.430775</td>
-<td class="data row0 col6" id="T_091db_row0_col6">507281.840000</td>
-<td class="data row0 col7" id="T_091db_row0_col7">95296.900000</td>
-<td class="data row0 col8" id="T_091db_row0_col8">602578.740000</td>
-<td class="data row0 col9" id="T_091db_row0_col9">0.695102</td>
-<td class="data row0 col10" id="T_091db_row0_col10">0.894935</td>
+<th class="row_heading level0 row0" id="T_812c6_level0_row0">maj_GTRgamma</th>
+<td class="data row0 col0" id="T_812c6_row0_col0">6.330000</td>
+<td class="data row0 col1" id="T_812c6_row0_col1">36.210000</td>
+<td class="data row0 col2" id="T_812c6_row0_col2">42.540000</td>
+<td class="data row0 col3" id="T_812c6_row0_col3">3.641547</td>
+<td class="data row0 col4" id="T_812c6_row0_col4">22.789228</td>
+<td class="data row0 col5" id="T_812c6_row0_col5">26.430775</td>
+<td class="data row0 col6" id="T_812c6_row0_col6">507281.840000</td>
+<td class="data row0 col7" id="T_812c6_row0_col7">95296.900000</td>
+<td class="data row0 col8" id="T_812c6_row0_col8">602578.740000</td>
+<td class="data row0 col9" id="T_812c6_row0_col9">0.695102</td>
+<td class="data row0 col10" id="T_812c6_row0_col10">0.894935</td>
 </tr>
 <tr>
-<th class="row_heading level0 row1" id="T_091db_level0_row1">rstar_GTRgamma_S1</th>
-<td class="data row1 col0" id="T_091db_row1_col0">20.120000</td>
-<td class="data row1 col1" id="T_091db_row1_col1">27.060000</td>
-<td class="data row1 col2" id="T_091db_row1_col2">47.180000</td>
-<td class="data row1 col3" id="T_091db_row1_col3">10.936172</td>
-<td class="data row1 col4" id="T_091db_row1_col4">14.227582</td>
-<td class="data row1 col5" id="T_091db_row1_col5">25.163754</td>
-<td class="data row1 col6" id="T_091db_row1_col6">369193.580000</td>
-<td class="data row1 col7" id="T_091db_row1_col7">239521.470000</td>
-<td class="data row1 col8" id="T_091db_row1_col8">608715.050000</td>
-<td class="data row1 col9" id="T_091db_row1_col9">0.929184</td>
-<td class="data row1 col10" id="T_091db_row1_col10">0.966931</td>
+<th class="row_heading level0 row1" id="T_812c6_level0_row1">rstar_GTRgamma_S1</th>
+<td class="data row1 col0" id="T_812c6_row1_col0">20.120000</td>
+<td class="data row1 col1" id="T_812c6_row1_col1">27.060000</td>
+<td class="data row1 col2" id="T_812c6_row1_col2">47.180000</td>
+<td class="data row1 col3" id="T_812c6_row1_col3">10.936172</td>
+<td class="data row1 col4" id="T_812c6_row1_col4">14.227582</td>
+<td class="data row1 col5" id="T_812c6_row1_col5">25.163754</td>
+<td class="data row1 col6" id="T_812c6_row1_col6">369193.580000</td>
+<td class="data row1 col7" id="T_812c6_row1_col7">239521.470000</td>
+<td class="data row1 col8" id="T_812c6_row1_col8">608715.050000</td>
+<td class="data row1 col9" id="T_812c6_row1_col9">0.929184</td>
+<td class="data row1 col10" id="T_812c6_row1_col10">0.966931</td>
 </tr>
 <tr>
-<th class="row_heading level0 row2" id="T_091db_level0_row2">MAP_GTRgamma</th>
-<td class="data row2 col0" id="T_091db_row2_col0">34.820000</td>
-<td class="data row2 col1" id="T_091db_row2_col1">34.820000</td>
-<td class="data row2 col2" id="T_091db_row2_col2">69.640000</td>
-<td class="data row2 col3" id="T_091db_row2_col3">16.326325</td>
-<td class="data row2 col4" id="T_091db_row2_col4">20.390621</td>
-<td class="data row2 col5" id="T_091db_row2_col5">36.716946</td>
-<td class="data row2 col6" id="T_091db_row2_col6">425425.130000</td>
-<td class="data row2 col7" id="T_091db_row2_col7">425425.130000</td>
-<td class="data row2 col8" id="T_091db_row2_col8">850850.260000</td>
-<td class="data row2 col9" id="T_091db_row2_col9">1.000000</td>
-<td class="data row2 col10" id="T_091db_row2_col10">1.000000</td>
+<th class="row_heading level0 row2" id="T_812c6_level0_row2">MAP_GTRgamma</th>
+<td class="data row2 col0" id="T_812c6_row2_col0">34.820000</td>
+<td class="data row2 col1" id="T_812c6_row2_col1">34.820000</td>
+<td class="data row2 col2" id="T_812c6_row2_col2">69.640000</td>
+<td class="data row2 col3" id="T_812c6_row2_col3">16.326325</td>
+<td class="data row2 col4" id="T_812c6_row2_col4">20.390621</td>
+<td class="data row2 col5" id="T_812c6_row2_col5">36.716946</td>
+<td class="data row2 col6" id="T_812c6_row2_col6">425425.130000</td>
+<td class="data row2 col7" id="T_812c6_row2_col7">425425.130000</td>
+<td class="data row2 col8" id="T_812c6_row2_col8">850850.260000</td>
+<td class="data row2 col9" id="T_812c6_row2_col9">1.000000</td>
+<td class="data row2 col10" id="T_812c6_row2_col10">1.000000</td>
 </tr>
 <tr>
-<th class="row_heading level0 row3" id="T_091db_level0_row3">ASTRAL_GTRgamma</th>
-<td class="data row3 col0" id="T_091db_row3_col0">25.360000</td>
-<td class="data row3 col1" id="T_091db_row3_col1">25.360000</td>
-<td class="data row3 col2" id="T_091db_row3_col2">50.720000</td>
-<td class="data row3 col3" id="T_091db_row3_col3">12.667759</td>
-<td class="data row3 col4" id="T_091db_row3_col4">13.002264</td>
-<td class="data row3 col5" id="T_091db_row3_col5">25.670022</td>
-<td class="data row3 col6" id="T_091db_row3_col6">299791.860000</td>
-<td class="data row3 col7" id="T_091db_row3_col7">299791.860000</td>
-<td class="data row3 col8" id="T_091db_row3_col8">599583.720000</td>
-<td class="data row3 col9" id="T_091db_row3_col9">1.000000</td>
-<td class="data row3 col10" id="T_091db_row3_col10">1.000000</td>
+<th class="row_heading level0 row3" id="T_812c6_level0_row3">ASTRAL_GTRgamma</th>
+<td class="data row3 col0" id="T_812c6_row3_col0">25.360000</td>
+<td class="data row3 col1" id="T_812c6_row3_col1">25.360000</td>
+<td class="data row3 col2" id="T_812c6_row3_col2">50.720000</td>
+<td class="data row3 col3" id="T_812c6_row3_col3">12.667759</td>
+<td class="data row3 col4" id="T_812c6_row3_col4">13.002264</td>
+<td class="data row3 col5" id="T_812c6_row3_col5">25.670022</td>
+<td class="data row3 col6" id="T_812c6_row3_col6">299791.860000</td>
+<td class="data row3 col7" id="T_812c6_row3_col7">299791.860000</td>
+<td class="data row3 col8" id="T_812c6_row3_col8">599583.720000</td>
+<td class="data row3 col9" id="T_812c6_row3_col9">1.000000</td>
+<td class="data row3 col10" id="T_812c6_row3_col10">1.000000</td>
 </tr>
 <tr>
-<th class="row_heading level0 row4" id="T_091db_level0_row4">ASTRALW_GTRgamma</th>
-<td class="data row4 col0" id="T_091db_row4_col0">25.330000</td>
-<td class="data row4 col1" id="T_091db_row4_col1">25.330000</td>
-<td class="data row4 col2" id="T_091db_row4_col2">50.660000</td>
-<td class="data row4 col3" id="T_091db_row4_col3">12.707656</td>
-<td class="data row4 col4" id="T_091db_row4_col4">12.963835</td>
-<td class="data row4 col5" id="T_091db_row4_col5">25.671490</td>
-<td class="data row4 col6" id="T_091db_row4_col6">298885.240000</td>
-<td class="data row4 col7" id="T_091db_row4_col7">298885.240000</td>
-<td class="data row4 col8" id="T_091db_row4_col8">597770.480000</td>
-<td class="data row4 col9" id="T_091db_row4_col9">1.000000</td>
-<td class="data row4 col10" id="T_091db_row4_col10">1.000000</td>
+<th class="row_heading level0 row4" id="T_812c6_level0_row4">ASTRALW_GTRgamma</th>
+<td class="data row4 col0" id="T_812c6_row4_col0">25.330000</td>
+<td class="data row4 col1" id="T_812c6_row4_col1">25.330000</td>
+<td class="data row4 col2" id="T_812c6_row4_col2">50.660000</td>
+<td class="data row4 col3" id="T_812c6_row4_col3">12.707656</td>
+<td class="data row4 col4" id="T_812c6_row4_col4">12.963835</td>
+<td class="data row4 col5" id="T_812c6_row4_col5">25.671490</td>
+<td class="data row4 col6" id="T_812c6_row4_col6">298885.240000</td>
+<td class="data row4 col7" id="T_812c6_row4_col7">298885.240000</td>
+<td class="data row4 col8" id="T_812c6_row4_col8">597770.480000</td>
+<td class="data row4 col9" id="T_812c6_row4_col9">1.000000</td>
+<td class="data row4 col10" id="T_812c6_row4_col10">1.000000</td>
 </tr>
 </tbody>
 </table>
@@ -7965,12 +7968,15 @@ $d_{sd, \alpha}(T, \hat{T}) = \alpha e(T, \hat{T}) + (1-\alpha) e(\hat{T}, T)$, 
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Estimated by GTR + gamma</span>
 <span class="n">cm</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s2">"vlag"</span><span class="p">,</span> <span class="n">as_cmap</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">cm2</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s2">"vlag_r"</span><span class="p">,</span> <span class="n">as_cmap</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">column_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"fp"</span><span class="p">,</span> <span class="s2">"fn"</span><span class="p">,</span> <span class="s2">"sd"</span><span class="p">,</span> <span class="s2">"fp_tbe"</span><span class="p">,</span> <span class="s2">"fn_tbe"</span><span class="p">,</span> <span class="s2">"std"</span><span class="p">,</span> <span class="s2">"tqdist"</span><span class="p">,</span> <span class="s2">"quartet_fp"</span><span class="p">,</span> <span class="s2">"symmetric_qdist"</span><span class="p">,</span> <span class="s2">"branch_resolution"</span><span class="p">,</span> <span class="s2">"quartet_resolution"</span><span class="p">]</span>
 <span class="n">group_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Symmetric difference"</span><span class="p">]</span><span class="o">*</span><span class="mi">3</span> <span class="o">+</span> <span class="p">[</span><span class="s2">"Transfer distance"</span><span class="p">]</span><span class="o">*</span><span class="mi">3</span> <span class="o">+</span> <span class="p">[</span><span class="s2">"Quartet distance"</span><span class="p">]</span><span class="o">*</span><span class="mi">3</span> <span class="o">+</span> <span class="p">[</span><span class="s2">"Resolution"</span><span class="p">]</span><span class="o">*</span><span class="mi">2</span>
 <span class="n">res</span> <span class="o">=</span> <span class="n">result_dict</span><span class="p">[</span><span class="s1">'tree1-0.5'</span><span class="p">][</span><span class="s1">'HKY0.5'</span><span class="p">][</span><span class="mi">1000</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="s2">"maj_GTRgamma"</span><span class="p">,</span> <span class="s2">"rstar_GTRgamma_S1"</span><span class="p">,</span> <span class="s2">"MAP_GTRgamma"</span><span class="p">,</span> <span class="s2">"ASTRAL_GTRgamma"</span><span class="p">,</span> <span class="s2">"ASTRALW_GTRgamma"</span><span class="p">],</span> <span class="n">column_list</span><span class="p">]</span>
 <span class="n">column_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">column_list</span><span class="p">,</span><span class="n">group_list</span><span class="p">))</span>
 <span class="n">res</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="o">.</span><span class="n">from_tuples</span><span class="p">([</span><span class="o">*</span><span class="nb">zip</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">column_dict</span><span class="o">.</span><span class="n">get</span><span class="p">,</span> <span class="n">res</span><span class="p">),</span> <span class="n">res</span><span class="p">)])</span>
-<span class="n">res</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">background_gradient</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="p">)</span><span class="o">.</span><span class="n">set_table_styles</span><span class="p">([{</span>
+<span class="n">columnA</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">columns</span><span class="p">[:</span><span class="mi">9</span><span class="p">]</span>
+<span class="n">columnB</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">9</span><span class="p">:</span><span class="mi">11</span><span class="p">]</span>
+<span class="n">res</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">background_gradient</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="p">,</span> <span class="n">subset</span><span class="o">=</span><span class="n">columnA</span><span class="p">)</span><span class="o">.</span><span class="n">background_gradient</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="n">cm2</span><span class="p">,</span> <span class="n">subset</span><span class="o">=</span><span class="n">columnB</span><span class="p">)</span><span class="o">.</span><span class="n">set_table_styles</span><span class="p">([{</span>
     <span class="s1">'selector'</span><span class="p">:</span> <span class="s1">'thead th'</span><span class="p">,</span>
     <span class="s1">'props'</span><span class="p">:</span> <span class="p">[(</span><span class="s1">'text-align'</span><span class="p">,</span> <span class="s1">'center'</span><span class="p">)]</span>
 <span class="p">}])</span>
@@ -7987,220 +7993,216 @@ $d_{sd, \alpha}(T, \hat{T}) = \alpha e(T, \hat{T}) + (1-\alpha) e(\hat{T}, T)$, 
 <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[ ]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <style type="text/css">
-#T_2ec03 thead th {
+#T_0f2b3 thead th {
   text-align: center;
 }
-#T_2ec03_row0_col0, #T_2ec03_row0_col2, #T_2ec03_row0_col3, #T_2ec03_row0_col5, #T_2ec03_row0_col7, #T_2ec03_row0_col8, #T_2ec03_row0_col9, #T_2ec03_row0_col10, #T_2ec03_row3_col4, #T_2ec03_row4_col1, #T_2ec03_row4_col6 {
+#T_0f2b3_row0_col0, #T_0f2b3_row0_col2, #T_0f2b3_row0_col3, #T_0f2b3_row0_col5, #T_0f2b3_row0_col7, #T_0f2b3_row0_col8, #T_0f2b3_row2_col9, #T_0f2b3_row2_col10, #T_0f2b3_row3_col4, #T_0f2b3_row3_col9, #T_0f2b3_row3_col10, #T_0f2b3_row4_col1, #T_0f2b3_row4_col6, #T_0f2b3_row4_col9, #T_0f2b3_row4_col10 {
   background-color: #2369bd;
   color: #f1f1f1;
 }
-#T_2ec03_row0_col1, #T_2ec03_row0_col4, #T_2ec03_row0_col6, #T_2ec03_row2_col0, #T_2ec03_row2_col2, #T_2ec03_row2_col3, #T_2ec03_row2_col5, #T_2ec03_row2_col7, #T_2ec03_row2_col8, #T_2ec03_row2_col9, #T_2ec03_row2_col10, #T_2ec03_row3_col9, #T_2ec03_row3_col10, #T_2ec03_row4_col9, #T_2ec03_row4_col10 {
+#T_0f2b3_row0_col1, #T_0f2b3_row0_col4, #T_0f2b3_row0_col6, #T_0f2b3_row0_col9, #T_0f2b3_row0_col10, #T_0f2b3_row2_col0, #T_0f2b3_row2_col2, #T_0f2b3_row2_col3, #T_0f2b3_row2_col5, #T_0f2b3_row2_col7, #T_0f2b3_row2_col8 {
   background-color: #a9373b;
   color: #f1f1f1;
 }
-#T_2ec03_row1_col0 {
+#T_0f2b3_row1_col0 {
   background-color: #d9a5a2;
   color: #000000;
 }
-#T_2ec03_row1_col1 {
+#T_0f2b3_row1_col1, #T_0f2b3_row1_col9 {
   background-color: #5983bd;
   color: #f1f1f1;
 }
-#T_2ec03_row1_col2 {
+#T_0f2b3_row1_col2 {
   background-color: #d4d8e2;
   color: #000000;
 }
-#T_2ec03_row1_col3 {
+#T_0f2b3_row1_col3 {
   background-color: #e7c7c5;
   color: #000000;
 }
-#T_2ec03_row1_col4 {
+#T_0f2b3_row1_col4 {
   background-color: #5c85bd;
   color: #f1f1f1;
 }
-#T_2ec03_row1_col5 {
+#T_0f2b3_row1_col5 {
   background-color: #97abc9;
   color: #f1f1f1;
 }
-#T_2ec03_row1_col6 {
+#T_0f2b3_row1_col6 {
   background-color: #2f6ebc;
   color: #f1f1f1;
 }
-#T_2ec03_row1_col7 {
+#T_0f2b3_row1_col7 {
   background-color: #e1bab8;
   color: #000000;
 }
-#T_2ec03_row1_col8 {
+#T_0f2b3_row1_col8 {
   background-color: #3972bc;
   color: #f1f1f1;
 }
-#T_2ec03_row1_col9 {
-  background-color: #ba5d5c;
+#T_0f2b3_row1_col10 {
+  background-color: #316fbc;
   color: #f1f1f1;
 }
-#T_2ec03_row1_col10 {
-  background-color: #ac3f42;
-  color: #f1f1f1;
-}
-#T_2ec03_row2_col1 {
+#T_0f2b3_row2_col1 {
   background-color: #e2e3ea;
   color: #000000;
 }
-#T_2ec03_row2_col4 {
+#T_0f2b3_row2_col4 {
   background-color: #dcaeab;
   color: #000000;
 }
-#T_2ec03_row2_col6 {
+#T_0f2b3_row2_col6 {
   background-color: #faf5f5;
   color: #000000;
 }
-#T_2ec03_row3_col0 {
+#T_0f2b3_row3_col0 {
   background-color: #cb8481;
   color: #f1f1f1;
 }
-#T_2ec03_row3_col1, #T_2ec03_row3_col6 {
+#T_0f2b3_row3_col1, #T_0f2b3_row3_col6 {
   background-color: #296cbc;
   color: #f1f1f1;
 }
-#T_2ec03_row3_col2 {
+#T_0f2b3_row3_col2 {
   background-color: #ecebef;
   color: #000000;
 }
-#T_2ec03_row3_col3 {
+#T_0f2b3_row3_col3 {
   background-color: #dfb5b3;
   color: #000000;
 }
-#T_2ec03_row3_col5 {
+#T_0f2b3_row3_col5 {
   background-color: #92a7c8;
   color: #f1f1f1;
 }
-#T_2ec03_row3_col7 {
+#T_0f2b3_row3_col7 {
   background-color: #deb1ae;
   color: #000000;
 }
-#T_2ec03_row3_col8 {
+#T_0f2b3_row3_col8 {
   background-color: #4879bc;
   color: #f1f1f1;
 }
-#T_2ec03_row4_col0 {
+#T_0f2b3_row4_col0 {
   background-color: #cc8784;
   color: #f1f1f1;
 }
-#T_2ec03_row4_col2 {
+#T_0f2b3_row4_col2 {
   background-color: #e7e7ec;
   color: #000000;
 }
-#T_2ec03_row4_col3, #T_2ec03_row4_col7 {
+#T_0f2b3_row4_col3, #T_0f2b3_row4_col7 {
   background-color: #dfb4b2;
   color: #000000;
 }
-#T_2ec03_row4_col4 {
+#T_0f2b3_row4_col4 {
   background-color: #266abd;
   color: #f1f1f1;
 }
-#T_2ec03_row4_col5 {
+#T_0f2b3_row4_col5 {
   background-color: #95a9c8;
   color: #f1f1f1;
 }
-#T_2ec03_row4_col8 {
+#T_0f2b3_row4_col8 {
   background-color: #3d74bc;
   color: #f1f1f1;
 }
 </style>
-<table id="T_2ec03">
+<table id="T_0f2b3">
 <thead>
 <tr>
 <th class="blank level0"> </th>
-<th class="col_heading level0 col0" colspan="3" id="T_2ec03_level0_col0">Symmetric difference</th>
-<th class="col_heading level0 col3" colspan="3" id="T_2ec03_level0_col3">Transfer distance</th>
-<th class="col_heading level0 col6" colspan="3" id="T_2ec03_level0_col6">Quartet distance</th>
-<th class="col_heading level0 col9" colspan="2" id="T_2ec03_level0_col9">Resolution</th>
+<th class="col_heading level0 col0" colspan="3" id="T_0f2b3_level0_col0">Symmetric difference</th>
+<th class="col_heading level0 col3" colspan="3" id="T_0f2b3_level0_col3">Transfer distance</th>
+<th class="col_heading level0 col6" colspan="3" id="T_0f2b3_level0_col6">Quartet distance</th>
+<th class="col_heading level0 col9" colspan="2" id="T_0f2b3_level0_col9">Resolution</th>
 </tr>
 <tr>
 <th class="blank level1"> </th>
-<th class="col_heading level1 col0" id="T_2ec03_level1_col0">fp</th>
-<th class="col_heading level1 col1" id="T_2ec03_level1_col1">fn</th>
-<th class="col_heading level1 col2" id="T_2ec03_level1_col2">sd</th>
-<th class="col_heading level1 col3" id="T_2ec03_level1_col3">fp_tbe</th>
-<th class="col_heading level1 col4" id="T_2ec03_level1_col4">fn_tbe</th>
-<th class="col_heading level1 col5" id="T_2ec03_level1_col5">std</th>
-<th class="col_heading level1 col6" id="T_2ec03_level1_col6">tqdist</th>
-<th class="col_heading level1 col7" id="T_2ec03_level1_col7">quartet_fp</th>
-<th class="col_heading level1 col8" id="T_2ec03_level1_col8">symmetric_qdist</th>
-<th class="col_heading level1 col9" id="T_2ec03_level1_col9">branch_resolution</th>
-<th class="col_heading level1 col10" id="T_2ec03_level1_col10">quartet_resolution</th>
+<th class="col_heading level1 col0" id="T_0f2b3_level1_col0">fp</th>
+<th class="col_heading level1 col1" id="T_0f2b3_level1_col1">fn</th>
+<th class="col_heading level1 col2" id="T_0f2b3_level1_col2">sd</th>
+<th class="col_heading level1 col3" id="T_0f2b3_level1_col3">fp_tbe</th>
+<th class="col_heading level1 col4" id="T_0f2b3_level1_col4">fn_tbe</th>
+<th class="col_heading level1 col5" id="T_0f2b3_level1_col5">std</th>
+<th class="col_heading level1 col6" id="T_0f2b3_level1_col6">tqdist</th>
+<th class="col_heading level1 col7" id="T_0f2b3_level1_col7">quartet_fp</th>
+<th class="col_heading level1 col8" id="T_0f2b3_level1_col8">symmetric_qdist</th>
+<th class="col_heading level1 col9" id="T_0f2b3_level1_col9">branch_resolution</th>
+<th class="col_heading level1 col10" id="T_0f2b3_level1_col10">quartet_resolution</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<th class="row_heading level0 row0" id="T_2ec03_level0_row0">maj_GTRgamma</th>
-<td class="data row0 col0" id="T_2ec03_row0_col0">4.090000</td>
-<td class="data row0 col1" id="T_2ec03_row0_col1">9.740000</td>
-<td class="data row0 col2" id="T_2ec03_row0_col2">13.830000</td>
-<td class="data row0 col3" id="T_2ec03_row0_col3">1.918512</td>
-<td class="data row0 col4" id="T_2ec03_row0_col4">4.859126</td>
-<td class="data row0 col5" id="T_2ec03_row0_col5">6.777638</td>
-<td class="data row0 col6" id="T_2ec03_row0_col6">83731.900000</td>
-<td class="data row0 col7" id="T_2ec03_row0_col7">55454.420000</td>
-<td class="data row0 col8" id="T_2ec03_row0_col8">139186.320000</td>
-<td class="data row0 col9" id="T_2ec03_row0_col9">0.942347</td>
-<td class="data row0 col10" id="T_2ec03_row0_col10">0.992789</td>
+<th class="row_heading level0 row0" id="T_0f2b3_level0_row0">maj_GTRgamma</th>
+<td class="data row0 col0" id="T_0f2b3_row0_col0">4.090000</td>
+<td class="data row0 col1" id="T_0f2b3_row0_col1">9.740000</td>
+<td class="data row0 col2" id="T_0f2b3_row0_col2">13.830000</td>
+<td class="data row0 col3" id="T_0f2b3_row0_col3">1.918512</td>
+<td class="data row0 col4" id="T_0f2b3_row0_col4">4.859126</td>
+<td class="data row0 col5" id="T_0f2b3_row0_col5">6.777638</td>
+<td class="data row0 col6" id="T_0f2b3_row0_col6">83731.900000</td>
+<td class="data row0 col7" id="T_0f2b3_row0_col7">55454.420000</td>
+<td class="data row0 col8" id="T_0f2b3_row0_col8">139186.320000</td>
+<td class="data row0 col9" id="T_0f2b3_row0_col9">0.942347</td>
+<td class="data row0 col10" id="T_0f2b3_row0_col10">0.992789</td>
 </tr>
 <tr>
-<th class="row_heading level0 row1" id="T_2ec03_level0_row1">rstar_GTRgamma_S1</th>
-<td class="data row1 col0" id="T_2ec03_row1_col0">7.260000</td>
-<td class="data row1 col1" id="T_2ec03_row1_col1">7.810000</td>
-<td class="data row1 col2" id="T_2ec03_row1_col2">15.070000</td>
-<td class="data row1 col3" id="T_2ec03_row1_col3">3.629461</td>
-<td class="data row1 col4" id="T_2ec03_row1_col4">3.698320</td>
-<td class="data row1 col5" id="T_2ec03_row1_col5">7.327781</td>
-<td class="data row1 col6" id="T_2ec03_row1_col6">70121.030000</td>
-<td class="data row1 col7" id="T_2ec03_row1_col7">69565.980000</td>
-<td class="data row1 col8" id="T_2ec03_row1_col8">139687.010000</td>
-<td class="data row1 col9" id="T_2ec03_row1_col9">0.994388</td>
-<td class="data row1 col10" id="T_2ec03_row1_col10">0.999858</td>
+<th class="row_heading level0 row1" id="T_0f2b3_level0_row1">rstar_GTRgamma_S1</th>
+<td class="data row1 col0" id="T_0f2b3_row1_col0">7.260000</td>
+<td class="data row1 col1" id="T_0f2b3_row1_col1">7.810000</td>
+<td class="data row1 col2" id="T_0f2b3_row1_col2">15.070000</td>
+<td class="data row1 col3" id="T_0f2b3_row1_col3">3.629461</td>
+<td class="data row1 col4" id="T_0f2b3_row1_col4">3.698320</td>
+<td class="data row1 col5" id="T_0f2b3_row1_col5">7.327781</td>
+<td class="data row1 col6" id="T_0f2b3_row1_col6">70121.030000</td>
+<td class="data row1 col7" id="T_0f2b3_row1_col7">69565.980000</td>
+<td class="data row1 col8" id="T_0f2b3_row1_col8">139687.010000</td>
+<td class="data row1 col9" id="T_0f2b3_row1_col9">0.994388</td>
+<td class="data row1 col10" id="T_0f2b3_row1_col10">0.999858</td>
 </tr>
 <tr>
-<th class="row_heading level0 row2" id="T_2ec03_level0_row2">MAP_GTRgamma</th>
-<td class="data row2 col0" id="T_2ec03_row2_col0">8.510000</td>
-<td class="data row2 col1" id="T_2ec03_row2_col1">8.510000</td>
-<td class="data row2 col2" id="T_2ec03_row2_col2">17.020000</td>
-<td class="data row2 col3" id="T_2ec03_row2_col3">4.622333</td>
-<td class="data row2 col4" id="T_2ec03_row2_col4">4.461732</td>
-<td class="data row2 col5" id="T_2ec03_row2_col5">9.084065</td>
-<td class="data row2 col6" id="T_2ec03_row2_col6">76731.210000</td>
-<td class="data row2 col7" id="T_2ec03_row2_col7">76731.210000</td>
-<td class="data row2 col8" id="T_2ec03_row2_col8">153462.420000</td>
-<td class="data row2 col9" id="T_2ec03_row2_col9">1.000000</td>
-<td class="data row2 col10" id="T_2ec03_row2_col10">1.000000</td>
+<th class="row_heading level0 row2" id="T_0f2b3_level0_row2">MAP_GTRgamma</th>
+<td class="data row2 col0" id="T_0f2b3_row2_col0">8.510000</td>
+<td class="data row2 col1" id="T_0f2b3_row2_col1">8.510000</td>
+<td class="data row2 col2" id="T_0f2b3_row2_col2">17.020000</td>
+<td class="data row2 col3" id="T_0f2b3_row2_col3">4.622333</td>
+<td class="data row2 col4" id="T_0f2b3_row2_col4">4.461732</td>
+<td class="data row2 col5" id="T_0f2b3_row2_col5">9.084065</td>
+<td class="data row2 col6" id="T_0f2b3_row2_col6">76731.210000</td>
+<td class="data row2 col7" id="T_0f2b3_row2_col7">76731.210000</td>
+<td class="data row2 col8" id="T_0f2b3_row2_col8">153462.420000</td>
+<td class="data row2 col9" id="T_0f2b3_row2_col9">1.000000</td>
+<td class="data row2 col10" id="T_0f2b3_row2_col10">1.000000</td>
 </tr>
 <tr>
-<th class="row_heading level0 row3" id="T_2ec03_level0_row3">ASTRAL_GTRgamma</th>
-<td class="data row3 col0" id="T_2ec03_row3_col0">7.630000</td>
-<td class="data row3 col1" id="T_2ec03_row3_col1">7.630000</td>
-<td class="data row3 col2" id="T_2ec03_row3_col2">15.260000</td>
-<td class="data row3 col3" id="T_2ec03_row3_col3">3.742238</td>
-<td class="data row3 col4" id="T_2ec03_row3_col4">3.566654</td>
-<td class="data row3 col5" id="T_2ec03_row3_col5">7.308892</td>
-<td class="data row3 col6" id="T_2ec03_row3_col6">70019.190000</td>
-<td class="data row3 col7" id="T_2ec03_row3_col7">70019.190000</td>
-<td class="data row3 col8" id="T_2ec03_row3_col8">140038.380000</td>
-<td class="data row3 col9" id="T_2ec03_row3_col9">1.000000</td>
-<td class="data row3 col10" id="T_2ec03_row3_col10">1.000000</td>
+<th class="row_heading level0 row3" id="T_0f2b3_level0_row3">ASTRAL_GTRgamma</th>
+<td class="data row3 col0" id="T_0f2b3_row3_col0">7.630000</td>
+<td class="data row3 col1" id="T_0f2b3_row3_col1">7.630000</td>
+<td class="data row3 col2" id="T_0f2b3_row3_col2">15.260000</td>
+<td class="data row3 col3" id="T_0f2b3_row3_col3">3.742238</td>
+<td class="data row3 col4" id="T_0f2b3_row3_col4">3.566654</td>
+<td class="data row3 col5" id="T_0f2b3_row3_col5">7.308892</td>
+<td class="data row3 col6" id="T_0f2b3_row3_col6">70019.190000</td>
+<td class="data row3 col7" id="T_0f2b3_row3_col7">70019.190000</td>
+<td class="data row3 col8" id="T_0f2b3_row3_col8">140038.380000</td>
+<td class="data row3 col9" id="T_0f2b3_row3_col9">1.000000</td>
+<td class="data row3 col10" id="T_0f2b3_row3_col10">1.000000</td>
 </tr>
 <tr>
-<th class="row_heading level0 row4" id="T_2ec03_level0_row4">ASTRALW_GTRgamma</th>
-<td class="data row4 col0" id="T_2ec03_row4_col0">7.610000</td>
-<td class="data row4 col1" id="T_2ec03_row4_col1">7.610000</td>
-<td class="data row4 col2" id="T_2ec03_row4_col2">15.220000</td>
-<td class="data row4 col3" id="T_2ec03_row4_col3">3.746747</td>
-<td class="data row4 col4" id="T_2ec03_row4_col4">3.574184</td>
-<td class="data row4 col5" id="T_2ec03_row4_col5">7.320931</td>
-<td class="data row4 col6" id="T_2ec03_row4_col6">69873.070000</td>
-<td class="data row4 col7" id="T_2ec03_row4_col7">69873.070000</td>
-<td class="data row4 col8" id="T_2ec03_row4_col8">139746.140000</td>
-<td class="data row4 col9" id="T_2ec03_row4_col9">1.000000</td>
-<td class="data row4 col10" id="T_2ec03_row4_col10">1.000000</td>
+<th class="row_heading level0 row4" id="T_0f2b3_level0_row4">ASTRALW_GTRgamma</th>
+<td class="data row4 col0" id="T_0f2b3_row4_col0">7.610000</td>
+<td class="data row4 col1" id="T_0f2b3_row4_col1">7.610000</td>
+<td class="data row4 col2" id="T_0f2b3_row4_col2">15.220000</td>
+<td class="data row4 col3" id="T_0f2b3_row4_col3">3.746747</td>
+<td class="data row4 col4" id="T_0f2b3_row4_col4">3.574184</td>
+<td class="data row4 col5" id="T_0f2b3_row4_col5">7.320931</td>
+<td class="data row4 col6" id="T_0f2b3_row4_col6">69873.070000</td>
+<td class="data row4 col7" id="T_0f2b3_row4_col7">69873.070000</td>
+<td class="data row4 col8" id="T_0f2b3_row4_col8">139746.140000</td>
+<td class="data row4 col9" id="T_0f2b3_row4_col9">1.000000</td>
+<td class="data row4 col10" id="T_0f2b3_row4_col10">1.000000</td>
 </tr>
 </tbody>
 </table>
@@ -8229,12 +8231,15 @@ $d_{sd, \alpha}(T, \hat{T}) = \alpha e(T, \hat{T}) + (1-\alpha) e(\hat{T}, T)$, 
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Estimated by GTR + gamma</span>
 <span class="n">cm</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s2">"vlag"</span><span class="p">,</span> <span class="n">as_cmap</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">cm2</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s2">"vlag_r"</span><span class="p">,</span> <span class="n">as_cmap</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">column_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"fp"</span><span class="p">,</span> <span class="s2">"fn"</span><span class="p">,</span> <span class="s2">"sd"</span><span class="p">,</span> <span class="s2">"fp_tbe"</span><span class="p">,</span> <span class="s2">"fn_tbe"</span><span class="p">,</span> <span class="s2">"std"</span><span class="p">,</span> <span class="s2">"tqdist"</span><span class="p">,</span> <span class="s2">"quartet_fp"</span><span class="p">,</span> <span class="s2">"symmetric_qdist"</span><span class="p">,</span> <span class="s2">"branch_resolution"</span><span class="p">,</span> <span class="s2">"quartet_resolution"</span><span class="p">]</span>
 <span class="n">group_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Symmetric difference"</span><span class="p">]</span><span class="o">*</span><span class="mi">3</span> <span class="o">+</span> <span class="p">[</span><span class="s2">"Transfer distance"</span><span class="p">]</span><span class="o">*</span><span class="mi">3</span> <span class="o">+</span> <span class="p">[</span><span class="s2">"Quartet distance"</span><span class="p">]</span><span class="o">*</span><span class="mi">3</span> <span class="o">+</span> <span class="p">[</span><span class="s2">"Resolution"</span><span class="p">]</span><span class="o">*</span><span class="mi">2</span>
 <span class="n">res</span> <span class="o">=</span> <span class="n">result_dict</span><span class="p">[</span><span class="s1">'tree1-0.05'</span><span class="p">][</span><span class="s1">'HKY0.5'</span><span class="p">][</span><span class="mi">100</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="s2">"maj_GTRgamma"</span><span class="p">,</span> <span class="s2">"rstar_GTRgamma_S1"</span><span class="p">,</span> <span class="s2">"MAP_GTRgamma"</span><span class="p">,</span> <span class="s2">"ASTRAL_GTRgamma"</span><span class="p">,</span> <span class="s2">"ASTRALW_GTRgamma"</span><span class="p">],</span> <span class="n">column_list</span><span class="p">]</span>
 <span class="n">column_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">column_list</span><span class="p">,</span><span class="n">group_list</span><span class="p">))</span>
 <span class="n">res</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="o">.</span><span class="n">from_tuples</span><span class="p">([</span><span class="o">*</span><span class="nb">zip</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">column_dict</span><span class="o">.</span><span class="n">get</span><span class="p">,</span> <span class="n">res</span><span class="p">),</span> <span class="n">res</span><span class="p">)])</span>
-<span class="n">res</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">background_gradient</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="p">)</span><span class="o">.</span><span class="n">set_table_styles</span><span class="p">([{</span>
+<span class="n">columnA</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">columns</span><span class="p">[:</span><span class="mi">9</span><span class="p">]</span>
+<span class="n">columnB</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">9</span><span class="p">:</span><span class="mi">11</span><span class="p">]</span>
+<span class="n">res</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">background_gradient</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="p">,</span> <span class="n">subset</span><span class="o">=</span><span class="n">columnA</span><span class="p">)</span><span class="o">.</span><span class="n">background_gradient</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="n">cm2</span><span class="p">,</span> <span class="n">subset</span><span class="o">=</span><span class="n">columnB</span><span class="p">)</span><span class="o">.</span><span class="n">set_table_styles</span><span class="p">([{</span>
     <span class="s1">'selector'</span><span class="p">:</span> <span class="s1">'thead th'</span><span class="p">,</span>
     <span class="s1">'props'</span><span class="p">:</span> <span class="p">[(</span><span class="s1">'text-align'</span><span class="p">,</span> <span class="s1">'center'</span><span class="p">)]</span>
 <span class="p">}])</span>
@@ -8251,208 +8256,208 @@ $d_{sd, \alpha}(T, \hat{T}) = \alpha e(T, \hat{T}) + (1-\alpha) e(\hat{T}, T)$, 
 <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[ ]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <style type="text/css">
-#T_9b004 thead th {
+#T_2f8e6 thead th {
   text-align: center;
 }
-#T_9b004_row0_col0, #T_9b004_row0_col2, #T_9b004_row0_col3, #T_9b004_row0_col5, #T_9b004_row0_col7, #T_9b004_row0_col9, #T_9b004_row0_col10, #T_9b004_row3_col1, #T_9b004_row3_col4, #T_9b004_row4_col1, #T_9b004_row4_col4, #T_9b004_row4_col6, #T_9b004_row4_col8 {
+#T_2f8e6_row0_col0, #T_2f8e6_row0_col2, #T_2f8e6_row0_col3, #T_2f8e6_row0_col5, #T_2f8e6_row0_col7, #T_2f8e6_row2_col9, #T_2f8e6_row2_col10, #T_2f8e6_row3_col1, #T_2f8e6_row3_col4, #T_2f8e6_row3_col9, #T_2f8e6_row3_col10, #T_2f8e6_row4_col1, #T_2f8e6_row4_col4, #T_2f8e6_row4_col6, #T_2f8e6_row4_col8, #T_2f8e6_row4_col9, #T_2f8e6_row4_col10 {
   background-color: #2369bd;
   color: #f1f1f1;
 }
-#T_9b004_row0_col1, #T_9b004_row0_col4, #T_9b004_row0_col6, #T_9b004_row2_col0, #T_9b004_row2_col2, #T_9b004_row2_col3, #T_9b004_row2_col5, #T_9b004_row2_col7, #T_9b004_row2_col8, #T_9b004_row2_col9, #T_9b004_row2_col10, #T_9b004_row3_col9, #T_9b004_row3_col10, #T_9b004_row4_col9, #T_9b004_row4_col10 {
+#T_2f8e6_row0_col1, #T_2f8e6_row0_col4, #T_2f8e6_row0_col6, #T_2f8e6_row0_col9, #T_2f8e6_row0_col10, #T_2f8e6_row2_col0, #T_2f8e6_row2_col2, #T_2f8e6_row2_col3, #T_2f8e6_row2_col5, #T_2f8e6_row2_col7, #T_2f8e6_row2_col8 {
   background-color: #a9373b;
   color: #f1f1f1;
 }
-#T_9b004_row0_col8 {
+#T_2f8e6_row0_col8 {
   background-color: #f8edeb;
   color: #000000;
 }
-#T_9b004_row1_col0 {
+#T_2f8e6_row1_col0 {
   background-color: #cfd4e0;
   color: #000000;
 }
-#T_9b004_row1_col1 {
+#T_2f8e6_row1_col1 {
   background-color: #829cc3;
   color: #f1f1f1;
 }
-#T_9b004_row1_col2 {
+#T_2f8e6_row1_col2 {
   background-color: #7896c1;
   color: #f1f1f1;
 }
-#T_9b004_row1_col3 {
+#T_2f8e6_row1_col3 {
   background-color: #f1eff2;
   color: #000000;
 }
-#T_9b004_row1_col4 {
+#T_2f8e6_row1_col4 {
   background-color: #8da4c6;
   color: #f1f1f1;
 }
-#T_9b004_row1_col5 {
+#T_2f8e6_row1_col5 {
   background-color: #3972bc;
   color: #f1f1f1;
 }
-#T_9b004_row1_col6 {
+#T_2f8e6_row1_col6 {
   background-color: #f6f3f4;
   color: #000000;
 }
-#T_9b004_row1_col7 {
+#T_2f8e6_row1_col7 {
   background-color: #8fa5c7;
   color: #f1f1f1;
 }
-#T_9b004_row1_col8 {
+#T_2f8e6_row1_col8 {
   background-color: #6a8dbf;
   color: #f1f1f1;
 }
-#T_9b004_row1_col9 {
-  background-color: #f3e2e0;
+#T_2f8e6_row1_col9 {
+  background-color: #e7e7ec;
   color: #000000;
 }
-#T_9b004_row1_col10 {
-  background-color: #f3f1f3;
+#T_2f8e6_row1_col10 {
+  background-color: #f9eeed;
   color: #000000;
 }
-#T_9b004_row2_col1 {
+#T_2f8e6_row2_col1 {
   background-color: #d1918e;
   color: #f1f1f1;
 }
-#T_9b004_row2_col4 {
+#T_2f8e6_row2_col4 {
   background-color: #f2e0df;
   color: #000000;
 }
-#T_9b004_row2_col6 {
+#T_2f8e6_row2_col6 {
   background-color: #d4d8e2;
   color: #000000;
 }
-#T_9b004_row3_col0, #T_9b004_row4_col0 {
+#T_2f8e6_row3_col0, #T_2f8e6_row4_col0 {
   background-color: #cd8987;
   color: #f1f1f1;
 }
-#T_9b004_row3_col2, #T_9b004_row4_col2 {
+#T_2f8e6_row3_col2, #T_2f8e6_row4_col2 {
   background-color: #f6e8e7;
   color: #000000;
 }
-#T_9b004_row3_col3, #T_9b004_row4_col3 {
+#T_2f8e6_row3_col3, #T_2f8e6_row4_col3 {
   background-color: #c97f7d;
   color: #f1f1f1;
 }
-#T_9b004_row3_col5 {
+#T_2f8e6_row3_col5 {
   background-color: #c0c9d9;
   color: #000000;
 }
-#T_9b004_row3_col6 {
+#T_2f8e6_row3_col6 {
   background-color: #266abd;
   color: #f1f1f1;
 }
-#T_9b004_row3_col7 {
+#T_2f8e6_row3_col7 {
   background-color: #ecd2d0;
   color: #000000;
 }
-#T_9b004_row3_col8 {
+#T_2f8e6_row3_col8 {
   background-color: #2c6dbc;
   color: #f1f1f1;
 }
-#T_9b004_row4_col5 {
+#T_2f8e6_row4_col5 {
   background-color: #c2cada;
   color: #000000;
 }
-#T_9b004_row4_col7 {
+#T_2f8e6_row4_col7 {
   background-color: #edd5d3;
   color: #000000;
 }
 </style>
-<table id="T_9b004">
+<table id="T_2f8e6">
 <thead>
 <tr>
 <th class="blank level0"> </th>
-<th class="col_heading level0 col0" colspan="3" id="T_9b004_level0_col0">Symmetric difference</th>
-<th class="col_heading level0 col3" colspan="3" id="T_9b004_level0_col3">Transfer distance</th>
-<th class="col_heading level0 col6" colspan="3" id="T_9b004_level0_col6">Quartet distance</th>
-<th class="col_heading level0 col9" colspan="2" id="T_9b004_level0_col9">Resolution</th>
+<th class="col_heading level0 col0" colspan="3" id="T_2f8e6_level0_col0">Symmetric difference</th>
+<th class="col_heading level0 col3" colspan="3" id="T_2f8e6_level0_col3">Transfer distance</th>
+<th class="col_heading level0 col6" colspan="3" id="T_2f8e6_level0_col6">Quartet distance</th>
+<th class="col_heading level0 col9" colspan="2" id="T_2f8e6_level0_col9">Resolution</th>
 </tr>
 <tr>
 <th class="blank level1"> </th>
-<th class="col_heading level1 col0" id="T_9b004_level1_col0">fp</th>
-<th class="col_heading level1 col1" id="T_9b004_level1_col1">fn</th>
-<th class="col_heading level1 col2" id="T_9b004_level1_col2">sd</th>
-<th class="col_heading level1 col3" id="T_9b004_level1_col3">fp_tbe</th>
-<th class="col_heading level1 col4" id="T_9b004_level1_col4">fn_tbe</th>
-<th class="col_heading level1 col5" id="T_9b004_level1_col5">std</th>
-<th class="col_heading level1 col6" id="T_9b004_level1_col6">tqdist</th>
-<th class="col_heading level1 col7" id="T_9b004_level1_col7">quartet_fp</th>
-<th class="col_heading level1 col8" id="T_9b004_level1_col8">symmetric_qdist</th>
-<th class="col_heading level1 col9" id="T_9b004_level1_col9">branch_resolution</th>
-<th class="col_heading level1 col10" id="T_9b004_level1_col10">quartet_resolution</th>
+<th class="col_heading level1 col0" id="T_2f8e6_level1_col0">fp</th>
+<th class="col_heading level1 col1" id="T_2f8e6_level1_col1">fn</th>
+<th class="col_heading level1 col2" id="T_2f8e6_level1_col2">sd</th>
+<th class="col_heading level1 col3" id="T_2f8e6_level1_col3">fp_tbe</th>
+<th class="col_heading level1 col4" id="T_2f8e6_level1_col4">fn_tbe</th>
+<th class="col_heading level1 col5" id="T_2f8e6_level1_col5">std</th>
+<th class="col_heading level1 col6" id="T_2f8e6_level1_col6">tqdist</th>
+<th class="col_heading level1 col7" id="T_2f8e6_level1_col7">quartet_fp</th>
+<th class="col_heading level1 col8" id="T_2f8e6_level1_col8">symmetric_qdist</th>
+<th class="col_heading level1 col9" id="T_2f8e6_level1_col9">branch_resolution</th>
+<th class="col_heading level1 col10" id="T_2f8e6_level1_col10">quartet_resolution</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<th class="row_heading level0 row0" id="T_9b004_level0_row0">maj_GTRgamma</th>
-<td class="data row0 col0" id="T_9b004_row0_col0">5.800000</td>
-<td class="data row0 col1" id="T_9b004_row0_col1">55.760000</td>
-<td class="data row0 col2" id="T_9b004_row0_col2">61.560000</td>
-<td class="data row0 col3" id="T_9b004_row0_col3">2.766672</td>
-<td class="data row0 col4" id="T_9b004_row0_col4">42.373848</td>
-<td class="data row0 col5" id="T_9b004_row0_col5">45.140520</td>
-<td class="data row0 col6" id="T_9b004_row0_col6">995789.190000</td>
-<td class="data row0 col7" id="T_9b004_row0_col7">67186.160000</td>
-<td class="data row0 col8" id="T_9b004_row0_col8">1062975.350000</td>
-<td class="data row0 col9" id="T_9b004_row0_col9">0.490204</td>
-<td class="data row0 col10" id="T_9b004_row0_col10">0.763185</td>
+<th class="row_heading level0 row0" id="T_2f8e6_level0_row0">maj_GTRgamma</th>
+<td class="data row0 col0" id="T_2f8e6_row0_col0">5.800000</td>
+<td class="data row0 col1" id="T_2f8e6_row0_col1">55.760000</td>
+<td class="data row0 col2" id="T_2f8e6_row0_col2">61.560000</td>
+<td class="data row0 col3" id="T_2f8e6_row0_col3">2.766672</td>
+<td class="data row0 col4" id="T_2f8e6_row0_col4">42.373848</td>
+<td class="data row0 col5" id="T_2f8e6_row0_col5">45.140520</td>
+<td class="data row0 col6" id="T_2f8e6_row0_col6">995789.190000</td>
+<td class="data row0 col7" id="T_2f8e6_row0_col7">67186.160000</td>
+<td class="data row0 col8" id="T_2f8e6_row0_col8">1062975.350000</td>
+<td class="data row0 col9" id="T_2f8e6_row0_col9">0.490204</td>
+<td class="data row0 col10" id="T_2f8e6_row0_col10">0.763185</td>
 </tr>
 <tr>
-<th class="row_heading level0 row1" id="T_9b004_level0_row1">rstar_GTRgamma_S1</th>
-<td class="data row1 col0" id="T_9b004_row1_col0">23.510000</td>
-<td class="data row1 col1" id="T_9b004_row1_col1">45.260000</td>
-<td class="data row1 col2" id="T_9b004_row1_col2">68.770000</td>
-<td class="data row1 col3" id="T_9b004_row1_col3">14.707558</td>
-<td class="data row1 col4" id="T_9b004_row1_col4">31.124158</td>
-<td class="data row1 col5" id="T_9b004_row1_col5">45.831715</td>
-<td class="data row1 col6" id="T_9b004_row1_col6">686368.290000</td>
-<td class="data row1 col7" id="T_9b004_row1_col7">192026.910000</td>
-<td class="data row1 col8" id="T_9b004_row1_col8">878395.200000</td>
-<td class="data row1 col9" id="T_9b004_row1_col9">0.778061</td>
-<td class="data row1 col10" id="T_9b004_row1_col10">0.873932</td>
+<th class="row_heading level0 row1" id="T_2f8e6_level0_row1">rstar_GTRgamma_S1</th>
+<td class="data row1 col0" id="T_2f8e6_row1_col0">23.510000</td>
+<td class="data row1 col1" id="T_2f8e6_row1_col1">45.260000</td>
+<td class="data row1 col2" id="T_2f8e6_row1_col2">68.770000</td>
+<td class="data row1 col3" id="T_2f8e6_row1_col3">14.707558</td>
+<td class="data row1 col4" id="T_2f8e6_row1_col4">31.124158</td>
+<td class="data row1 col5" id="T_2f8e6_row1_col5">45.831715</td>
+<td class="data row1 col6" id="T_2f8e6_row1_col6">686368.290000</td>
+<td class="data row1 col7" id="T_2f8e6_row1_col7">192026.910000</td>
+<td class="data row1 col8" id="T_2f8e6_row1_col8">878395.200000</td>
+<td class="data row1 col9" id="T_2f8e6_row1_col9">0.778061</td>
+<td class="data row1 col10" id="T_2f8e6_row1_col10">0.873932</td>
 </tr>
 <tr>
-<th class="row_heading level0 row2" id="T_9b004_level0_row2">MAP_GTRgamma</th>
-<td class="data row2 col0" id="T_9b004_row2_col0">52.720000</td>
-<td class="data row2 col1" id="T_9b004_row2_col1">52.720000</td>
-<td class="data row2 col2" id="T_9b004_row2_col2">105.440000</td>
-<td class="data row2 col3" id="T_9b004_row2_col3">28.780927</td>
-<td class="data row2 col4" id="T_9b004_row2_col4">36.146668</td>
-<td class="data row2 col5" id="T_9b004_row2_col5">64.927595</td>
-<td class="data row2 col6" id="T_9b004_row2_col6">637444.570000</td>
-<td class="data row2 col7" id="T_9b004_row2_col7">637444.570000</td>
-<td class="data row2 col8" id="T_9b004_row2_col8">1274889.140000</td>
-<td class="data row2 col9" id="T_9b004_row2_col9">1.000000</td>
-<td class="data row2 col10" id="T_9b004_row2_col10">1.000000</td>
+<th class="row_heading level0 row2" id="T_2f8e6_level0_row2">MAP_GTRgamma</th>
+<td class="data row2 col0" id="T_2f8e6_row2_col0">52.720000</td>
+<td class="data row2 col1" id="T_2f8e6_row2_col1">52.720000</td>
+<td class="data row2 col2" id="T_2f8e6_row2_col2">105.440000</td>
+<td class="data row2 col3" id="T_2f8e6_row2_col3">28.780927</td>
+<td class="data row2 col4" id="T_2f8e6_row2_col4">36.146668</td>
+<td class="data row2 col5" id="T_2f8e6_row2_col5">64.927595</td>
+<td class="data row2 col6" id="T_2f8e6_row2_col6">637444.570000</td>
+<td class="data row2 col7" id="T_2f8e6_row2_col7">637444.570000</td>
+<td class="data row2 col8" id="T_2f8e6_row2_col8">1274889.140000</td>
+<td class="data row2 col9" id="T_2f8e6_row2_col9">1.000000</td>
+<td class="data row2 col10" id="T_2f8e6_row2_col10">1.000000</td>
 </tr>
 <tr>
-<th class="row_heading level0 row3" id="T_9b004_level0_row3">ASTRAL_GTRgamma</th>
-<td class="data row3 col0" id="T_9b004_row3_col0">42.780000</td>
-<td class="data row3 col1" id="T_9b004_row3_col1">42.780000</td>
-<td class="data row3 col2" id="T_9b004_row3_col2">85.560000</td>
-<td class="data row3 col3" id="T_9b004_row3_col3">23.945330</td>
-<td class="data row3 col4" id="T_9b004_row3_col4">27.979426</td>
-<td class="data row3 col5" id="T_9b004_row3_col5">51.924755</td>
-<td class="data row3 col6" id="T_9b004_row3_col6">410677.160000</td>
-<td class="data row3 col7" id="T_9b004_row3_col7">410677.160000</td>
-<td class="data row3 col8" id="T_9b004_row3_col8">821354.320000</td>
-<td class="data row3 col9" id="T_9b004_row3_col9">1.000000</td>
-<td class="data row3 col10" id="T_9b004_row3_col10">1.000000</td>
+<th class="row_heading level0 row3" id="T_2f8e6_level0_row3">ASTRAL_GTRgamma</th>
+<td class="data row3 col0" id="T_2f8e6_row3_col0">42.780000</td>
+<td class="data row3 col1" id="T_2f8e6_row3_col1">42.780000</td>
+<td class="data row3 col2" id="T_2f8e6_row3_col2">85.560000</td>
+<td class="data row3 col3" id="T_2f8e6_row3_col3">23.945330</td>
+<td class="data row3 col4" id="T_2f8e6_row3_col4">27.979426</td>
+<td class="data row3 col5" id="T_2f8e6_row3_col5">51.924755</td>
+<td class="data row3 col6" id="T_2f8e6_row3_col6">410677.160000</td>
+<td class="data row3 col7" id="T_2f8e6_row3_col7">410677.160000</td>
+<td class="data row3 col8" id="T_2f8e6_row3_col8">821354.320000</td>
+<td class="data row3 col9" id="T_2f8e6_row3_col9">1.000000</td>
+<td class="data row3 col10" id="T_2f8e6_row3_col10">1.000000</td>
 </tr>
 <tr>
-<th class="row_heading level0 row4" id="T_9b004_level0_row4">ASTRALW_GTRgamma</th>
-<td class="data row4 col0" id="T_9b004_row4_col0">42.810000</td>
-<td class="data row4 col1" id="T_9b004_row4_col1">42.810000</td>
-<td class="data row4 col2" id="T_9b004_row4_col2">85.620000</td>
-<td class="data row4 col3" id="T_9b004_row4_col3">23.928151</td>
-<td class="data row4 col4" id="T_9b004_row4_col4">28.020131</td>
-<td class="data row4 col5" id="T_9b004_row4_col5">51.948282</td>
-<td class="data row4 col6" id="T_9b004_row4_col6">407830.830000</td>
-<td class="data row4 col7" id="T_9b004_row4_col7">407830.830000</td>
-<td class="data row4 col8" id="T_9b004_row4_col8">815661.660000</td>
-<td class="data row4 col9" id="T_9b004_row4_col9">1.000000</td>
-<td class="data row4 col10" id="T_9b004_row4_col10">1.000000</td>
+<th class="row_heading level0 row4" id="T_2f8e6_level0_row4">ASTRALW_GTRgamma</th>
+<td class="data row4 col0" id="T_2f8e6_row4_col0">42.810000</td>
+<td class="data row4 col1" id="T_2f8e6_row4_col1">42.810000</td>
+<td class="data row4 col2" id="T_2f8e6_row4_col2">85.620000</td>
+<td class="data row4 col3" id="T_2f8e6_row4_col3">23.928151</td>
+<td class="data row4 col4" id="T_2f8e6_row4_col4">28.020131</td>
+<td class="data row4 col5" id="T_2f8e6_row4_col5">51.948282</td>
+<td class="data row4 col6" id="T_2f8e6_row4_col6">407830.830000</td>
+<td class="data row4 col7" id="T_2f8e6_row4_col7">407830.830000</td>
+<td class="data row4 col8" id="T_2f8e6_row4_col8">815661.660000</td>
+<td class="data row4 col9" id="T_2f8e6_row4_col9">1.000000</td>
+<td class="data row4 col10" id="T_2f8e6_row4_col10">1.000000</td>
 </tr>
 </tbody>
 </table>
@@ -8481,12 +8486,15 @@ $d_{sd, \alpha}(T, \hat{T}) = \alpha e(T, \hat{T}) + (1-\alpha) e(\hat{T}, T)$, 
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Estimated by GTR + gamma</span>
 <span class="n">cm</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s2">"vlag"</span><span class="p">,</span> <span class="n">as_cmap</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">cm2</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s2">"vlag_r"</span><span class="p">,</span> <span class="n">as_cmap</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">column_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"fp"</span><span class="p">,</span> <span class="s2">"fn"</span><span class="p">,</span> <span class="s2">"sd"</span><span class="p">,</span> <span class="s2">"fp_tbe"</span><span class="p">,</span> <span class="s2">"fn_tbe"</span><span class="p">,</span> <span class="s2">"std"</span><span class="p">,</span> <span class="s2">"tqdist"</span><span class="p">,</span> <span class="s2">"quartet_fp"</span><span class="p">,</span> <span class="s2">"symmetric_qdist"</span><span class="p">,</span> <span class="s2">"branch_resolution"</span><span class="p">,</span> <span class="s2">"quartet_resolution"</span><span class="p">]</span>
 <span class="n">group_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Symmetric difference"</span><span class="p">]</span><span class="o">*</span><span class="mi">3</span> <span class="o">+</span> <span class="p">[</span><span class="s2">"Transfer distance"</span><span class="p">]</span><span class="o">*</span><span class="mi">3</span> <span class="o">+</span> <span class="p">[</span><span class="s2">"Quartet distance"</span><span class="p">]</span><span class="o">*</span><span class="mi">3</span> <span class="o">+</span> <span class="p">[</span><span class="s2">"Resolution"</span><span class="p">]</span><span class="o">*</span><span class="mi">2</span>
 <span class="n">res</span> <span class="o">=</span> <span class="n">result_dict</span><span class="p">[</span><span class="s1">'tree1-0.05'</span><span class="p">][</span><span class="s1">'HKY0.5'</span><span class="p">][</span><span class="mi">1000</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[[</span><span class="s2">"maj_GTRgamma"</span><span class="p">,</span> <span class="s2">"rstar_GTRgamma_S1"</span><span class="p">,</span> <span class="s2">"MAP_GTRgamma"</span><span class="p">,</span> <span class="s2">"ASTRAL_GTRgamma"</span><span class="p">,</span> <span class="s2">"ASTRALW_GTRgamma"</span><span class="p">],</span> <span class="n">column_list</span><span class="p">]</span>
 <span class="n">column_dict</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">column_list</span><span class="p">,</span><span class="n">group_list</span><span class="p">))</span>
 <span class="n">res</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">MultiIndex</span><span class="o">.</span><span class="n">from_tuples</span><span class="p">([</span><span class="o">*</span><span class="nb">zip</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="n">column_dict</span><span class="o">.</span><span class="n">get</span><span class="p">,</span> <span class="n">res</span><span class="p">),</span> <span class="n">res</span><span class="p">)])</span>
-<span class="n">res</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">background_gradient</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="p">)</span><span class="o">.</span><span class="n">set_table_styles</span><span class="p">([{</span>
+<span class="n">columnA</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">columns</span><span class="p">[:</span><span class="mi">9</span><span class="p">]</span>
+<span class="n">columnB</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">columns</span><span class="p">[</span><span class="mi">9</span><span class="p">:</span><span class="mi">11</span><span class="p">]</span>
+<span class="n">res</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">background_gradient</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="n">cm</span><span class="p">,</span> <span class="n">subset</span><span class="o">=</span><span class="n">columnA</span><span class="p">)</span><span class="o">.</span><span class="n">background_gradient</span><span class="p">(</span><span class="n">cmap</span><span class="o">=</span><span class="n">cm2</span><span class="p">,</span> <span class="n">subset</span><span class="o">=</span><span class="n">columnB</span><span class="p">)</span><span class="o">.</span><span class="n">set_table_styles</span><span class="p">([{</span>
     <span class="s1">'selector'</span><span class="p">:</span> <span class="s1">'thead th'</span><span class="p">,</span>
     <span class="s1">'props'</span><span class="p">:</span> <span class="p">[(</span><span class="s1">'text-align'</span><span class="p">,</span> <span class="s1">'center'</span><span class="p">)]</span>
 <span class="p">}])</span>
@@ -8503,188 +8511,184 @@ $d_{sd, \alpha}(T, \hat{T}) = \alpha e(T, \hat{T}) + (1-\alpha) e(\hat{T}, T)$, 
 <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[ ]:</div>
 <div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/html" tabindex="0">
 <style type="text/css">
-#T_e281c thead th {
+#T_37364 thead th {
   text-align: center;
 }
-#T_e281c_row0_col0, #T_e281c_row0_col2, #T_e281c_row0_col3, #T_e281c_row0_col5, #T_e281c_row0_col7, #T_e281c_row0_col8, #T_e281c_row0_col9, #T_e281c_row0_col10, #T_e281c_row3_col1, #T_e281c_row3_col4, #T_e281c_row3_col6, #T_e281c_row4_col1, #T_e281c_row4_col4, #T_e281c_row4_col6 {
+#T_37364_row0_col0, #T_37364_row0_col2, #T_37364_row0_col3, #T_37364_row0_col5, #T_37364_row0_col7, #T_37364_row0_col8, #T_37364_row2_col9, #T_37364_row2_col10, #T_37364_row3_col1, #T_37364_row3_col4, #T_37364_row3_col6, #T_37364_row3_col9, #T_37364_row3_col10, #T_37364_row4_col1, #T_37364_row4_col4, #T_37364_row4_col6, #T_37364_row4_col9, #T_37364_row4_col10 {
   background-color: #2369bd;
   color: #f1f1f1;
 }
-#T_e281c_row0_col1, #T_e281c_row0_col4, #T_e281c_row2_col0, #T_e281c_row2_col2, #T_e281c_row2_col3, #T_e281c_row2_col5, #T_e281c_row2_col6, #T_e281c_row2_col7, #T_e281c_row2_col8, #T_e281c_row2_col9, #T_e281c_row2_col10, #T_e281c_row3_col9, #T_e281c_row3_col10, #T_e281c_row4_col9, #T_e281c_row4_col10 {
+#T_37364_row0_col1, #T_37364_row0_col4, #T_37364_row0_col9, #T_37364_row0_col10, #T_37364_row2_col0, #T_37364_row2_col2, #T_37364_row2_col3, #T_37364_row2_col5, #T_37364_row2_col6, #T_37364_row2_col7, #T_37364_row2_col8 {
   background-color: #a9373b;
   color: #f1f1f1;
 }
-#T_e281c_row0_col6 {
+#T_37364_row0_col6 {
   background-color: #f5e7e5;
   color: #000000;
 }
-#T_e281c_row1_col0 {
+#T_37364_row1_col0 {
   background-color: #dcaeab;
   color: #000000;
 }
-#T_e281c_row1_col1 {
+#T_37364_row1_col1, #T_37364_row1_col10 {
   background-color: #3f75bc;
   color: #f1f1f1;
 }
-#T_e281c_row1_col2 {
+#T_37364_row1_col2 {
   background-color: #a3b4cd;
   color: #000000;
 }
-#T_e281c_row1_col3 {
+#T_37364_row1_col3 {
   background-color: #daa9a7;
   color: #000000;
 }
-#T_e281c_row1_col4 {
+#T_37364_row1_col4 {
   background-color: #316fbc;
   color: #f1f1f1;
 }
-#T_e281c_row1_col5 {
+#T_37364_row1_col5 {
   background-color: #7594c0;
   color: #f1f1f1;
 }
-#T_e281c_row1_col6 {
+#T_37364_row1_col6 {
   background-color: #266abd;
   color: #f1f1f1;
 }
-#T_e281c_row1_col7 {
+#T_37364_row1_col7 {
   background-color: #e2e3ea;
   color: #000000;
 }
-#T_e281c_row1_col8 {
+#T_37364_row1_col8 {
   background-color: #5b84bd;
   color: #f1f1f1;
 }
-#T_e281c_row1_col9 {
-  background-color: #b24a4b;
+#T_37364_row1_col9 {
+  background-color: #4276bc;
   color: #f1f1f1;
 }
-#T_e281c_row1_col10 {
-  background-color: #b1494a;
-  color: #f1f1f1;
-}
-#T_e281c_row2_col1 {
+#T_37364_row2_col1 {
   background-color: #f9eeed;
   color: #000000;
 }
-#T_e281c_row2_col4 {
+#T_37364_row2_col4 {
   background-color: #f9efee;
   color: #000000;
 }
-#T_e281c_row3_col0, #T_e281c_row3_col3, #T_e281c_row4_col0, #T_e281c_row4_col3 {
+#T_37364_row3_col0, #T_37364_row3_col3, #T_37364_row4_col0, #T_37364_row4_col3 {
   background-color: #d7a09d;
   color: #000000;
 }
-#T_e281c_row3_col2, #T_e281c_row4_col2 {
+#T_37364_row3_col2, #T_37364_row4_col2 {
   background-color: #aab8d0;
   color: #000000;
 }
-#T_e281c_row3_col5, #T_e281c_row4_col5 {
+#T_37364_row3_col5, #T_37364_row4_col5 {
   background-color: #7b98c2;
   color: #f1f1f1;
 }
-#T_e281c_row3_col7, #T_e281c_row4_col7 {
+#T_37364_row3_col7, #T_37364_row4_col7 {
   background-color: #efeef1;
   color: #000000;
 }
-#T_e281c_row3_col8, #T_e281c_row4_col8 {
+#T_37364_row3_col8, #T_37364_row4_col8 {
   background-color: #658abe;
   color: #f1f1f1;
 }
 </style>
-<table id="T_e281c">
+<table id="T_37364">
 <thead>
 <tr>
 <th class="blank level0"> </th>
-<th class="col_heading level0 col0" colspan="3" id="T_e281c_level0_col0">Symmetric difference</th>
-<th class="col_heading level0 col3" colspan="3" id="T_e281c_level0_col3">Transfer distance</th>
-<th class="col_heading level0 col6" colspan="3" id="T_e281c_level0_col6">Quartet distance</th>
-<th class="col_heading level0 col9" colspan="2" id="T_e281c_level0_col9">Resolution</th>
+<th class="col_heading level0 col0" colspan="3" id="T_37364_level0_col0">Symmetric difference</th>
+<th class="col_heading level0 col3" colspan="3" id="T_37364_level0_col3">Transfer distance</th>
+<th class="col_heading level0 col6" colspan="3" id="T_37364_level0_col6">Quartet distance</th>
+<th class="col_heading level0 col9" colspan="2" id="T_37364_level0_col9">Resolution</th>
 </tr>
 <tr>
 <th class="blank level1"> </th>
-<th class="col_heading level1 col0" id="T_e281c_level1_col0">fp</th>
-<th class="col_heading level1 col1" id="T_e281c_level1_col1">fn</th>
-<th class="col_heading level1 col2" id="T_e281c_level1_col2">sd</th>
-<th class="col_heading level1 col3" id="T_e281c_level1_col3">fp_tbe</th>
-<th class="col_heading level1 col4" id="T_e281c_level1_col4">fn_tbe</th>
-<th class="col_heading level1 col5" id="T_e281c_level1_col5">std</th>
-<th class="col_heading level1 col6" id="T_e281c_level1_col6">tqdist</th>
-<th class="col_heading level1 col7" id="T_e281c_level1_col7">quartet_fp</th>
-<th class="col_heading level1 col8" id="T_e281c_level1_col8">symmetric_qdist</th>
-<th class="col_heading level1 col9" id="T_e281c_level1_col9">branch_resolution</th>
-<th class="col_heading level1 col10" id="T_e281c_level1_col10">quartet_resolution</th>
+<th class="col_heading level1 col0" id="T_37364_level1_col0">fp</th>
+<th class="col_heading level1 col1" id="T_37364_level1_col1">fn</th>
+<th class="col_heading level1 col2" id="T_37364_level1_col2">sd</th>
+<th class="col_heading level1 col3" id="T_37364_level1_col3">fp_tbe</th>
+<th class="col_heading level1 col4" id="T_37364_level1_col4">fn_tbe</th>
+<th class="col_heading level1 col5" id="T_37364_level1_col5">std</th>
+<th class="col_heading level1 col6" id="T_37364_level1_col6">tqdist</th>
+<th class="col_heading level1 col7" id="T_37364_level1_col7">quartet_fp</th>
+<th class="col_heading level1 col8" id="T_37364_level1_col8">symmetric_qdist</th>
+<th class="col_heading level1 col9" id="T_37364_level1_col9">branch_resolution</th>
+<th class="col_heading level1 col10" id="T_37364_level1_col10">quartet_resolution</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<th class="row_heading level0 row0" id="T_e281c_level0_row0">maj_GTRgamma</th>
-<td class="data row0 col0" id="T_e281c_row0_col0">4.190000</td>
-<td class="data row0 col1" id="T_e281c_row0_col1">13.430000</td>
-<td class="data row0 col2" id="T_e281c_row0_col2">17.620000</td>
-<td class="data row0 col3" id="T_e281c_row0_col3">1.929625</td>
-<td class="data row0 col4" id="T_e281c_row0_col4">7.825445</td>
-<td class="data row0 col5" id="T_e281c_row0_col5">9.755070</td>
-<td class="data row0 col6" id="T_e281c_row0_col6">81810.690000</td>
-<td class="data row0 col7" id="T_e281c_row0_col7">26145.300000</td>
-<td class="data row0 col8" id="T_e281c_row0_col8">107955.990000</td>
-<td class="data row0 col9" id="T_e281c_row0_col9">0.905714</td>
-<td class="data row0 col10" id="T_e281c_row0_col10">0.985804</td>
+<th class="row_heading level0 row0" id="T_37364_level0_row0">maj_GTRgamma</th>
+<td class="data row0 col0" id="T_37364_row0_col0">4.190000</td>
+<td class="data row0 col1" id="T_37364_row0_col1">13.430000</td>
+<td class="data row0 col2" id="T_37364_row0_col2">17.620000</td>
+<td class="data row0 col3" id="T_37364_row0_col3">1.929625</td>
+<td class="data row0 col4" id="T_37364_row0_col4">7.825445</td>
+<td class="data row0 col5" id="T_37364_row0_col5">9.755070</td>
+<td class="data row0 col6" id="T_37364_row0_col6">81810.690000</td>
+<td class="data row0 col7" id="T_37364_row0_col7">26145.300000</td>
+<td class="data row0 col8" id="T_37364_row0_col8">107955.990000</td>
+<td class="data row0 col9" id="T_37364_row0_col9">0.905714</td>
+<td class="data row0 col10" id="T_37364_row0_col10">0.985804</td>
 </tr>
 <tr>
-<th class="row_heading level0 row1" id="T_e281c_level0_row1">rstar_GTRgamma_S1</th>
-<td class="data row1 col0" id="T_e281c_row1_col0">9.360000</td>
-<td class="data row1 col1" id="T_e281c_row1_col1">9.800000</td>
-<td class="data row1 col2" id="T_e281c_row1_col2">19.160000</td>
-<td class="data row1 col3" id="T_e281c_row1_col3">5.013480</td>
-<td class="data row1 col4" id="T_e281c_row1_col4">5.235805</td>
-<td class="data row1 col5" id="T_e281c_row1_col5">10.249284</td>
-<td class="data row1 col6" id="T_e281c_row1_col6">59824.720000</td>
-<td class="data row1 col7" id="T_e281c_row1_col7">57388.590000</td>
-<td class="data row1 col8" id="T_e281c_row1_col8">117213.310000</td>
-<td class="data row1 col9" id="T_e281c_row1_col9">0.995510</td>
-<td class="data row1 col10" id="T_e281c_row1_col10">0.999379</td>
+<th class="row_heading level0 row1" id="T_37364_level0_row1">rstar_GTRgamma_S1</th>
+<td class="data row1 col0" id="T_37364_row1_col0">9.360000</td>
+<td class="data row1 col1" id="T_37364_row1_col1">9.800000</td>
+<td class="data row1 col2" id="T_37364_row1_col2">19.160000</td>
+<td class="data row1 col3" id="T_37364_row1_col3">5.013480</td>
+<td class="data row1 col4" id="T_37364_row1_col4">5.235805</td>
+<td class="data row1 col5" id="T_37364_row1_col5">10.249284</td>
+<td class="data row1 col6" id="T_37364_row1_col6">59824.720000</td>
+<td class="data row1 col7" id="T_37364_row1_col7">57388.590000</td>
+<td class="data row1 col8" id="T_37364_row1_col8">117213.310000</td>
+<td class="data row1 col9" id="T_37364_row1_col9">0.995510</td>
+<td class="data row1 col10" id="T_37364_row1_col10">0.999379</td>
 </tr>
 <tr>
-<th class="row_heading level0 row2" id="T_e281c_level0_row2">MAP_GTRgamma</th>
-<td class="data row2 col0" id="T_e281c_row2_col0">11.660000</td>
-<td class="data row2 col1" id="T_e281c_row2_col1">11.660000</td>
-<td class="data row2 col2" id="T_e281c_row2_col2">23.320000</td>
-<td class="data row2 col3" id="T_e281c_row2_col3">6.309039</td>
-<td class="data row2 col4" id="T_e281c_row2_col4">6.577948</td>
-<td class="data row2 col5" id="T_e281c_row2_col5">12.886987</td>
-<td class="data row2 col6" id="T_e281c_row2_col6">99642.090000</td>
-<td class="data row2 col7" id="T_e281c_row2_col7">99642.090000</td>
-<td class="data row2 col8" id="T_e281c_row2_col8">199284.180000</td>
-<td class="data row2 col9" id="T_e281c_row2_col9">1.000000</td>
-<td class="data row2 col10" id="T_e281c_row2_col10">1.000000</td>
+<th class="row_heading level0 row2" id="T_37364_level0_row2">MAP_GTRgamma</th>
+<td class="data row2 col0" id="T_37364_row2_col0">11.660000</td>
+<td class="data row2 col1" id="T_37364_row2_col1">11.660000</td>
+<td class="data row2 col2" id="T_37364_row2_col2">23.320000</td>
+<td class="data row2 col3" id="T_37364_row2_col3">6.309039</td>
+<td class="data row2 col4" id="T_37364_row2_col4">6.577948</td>
+<td class="data row2 col5" id="T_37364_row2_col5">12.886987</td>
+<td class="data row2 col6" id="T_37364_row2_col6">99642.090000</td>
+<td class="data row2 col7" id="T_37364_row2_col7">99642.090000</td>
+<td class="data row2 col8" id="T_37364_row2_col8">199284.180000</td>
+<td class="data row2 col9" id="T_37364_row2_col9">1.000000</td>
+<td class="data row2 col10" id="T_37364_row2_col10">1.000000</td>
 </tr>
 <tr>
-<th class="row_heading level0 row3" id="T_e281c_level0_row3">ASTRAL_GTRgamma</th>
-<td class="data row3 col0" id="T_e281c_row3_col0">9.630000</td>
-<td class="data row3 col1" id="T_e281c_row3_col1">9.630000</td>
-<td class="data row3 col2" id="T_e281c_row3_col2">19.260000</td>
-<td class="data row3 col3" id="T_e281c_row3_col3">5.122096</td>
-<td class="data row3 col4" id="T_e281c_row3_col4">5.178683</td>
-<td class="data row3 col5" id="T_e281c_row3_col5">10.300779</td>
-<td class="data row3 col6" id="T_e281c_row3_col6">59631.020000</td>
-<td class="data row3 col7" id="T_e281c_row3_col7">59631.020000</td>
-<td class="data row3 col8" id="T_e281c_row3_col8">119262.040000</td>
-<td class="data row3 col9" id="T_e281c_row3_col9">1.000000</td>
-<td class="data row3 col10" id="T_e281c_row3_col10">1.000000</td>
+<th class="row_heading level0 row3" id="T_37364_level0_row3">ASTRAL_GTRgamma</th>
+<td class="data row3 col0" id="T_37364_row3_col0">9.630000</td>
+<td class="data row3 col1" id="T_37364_row3_col1">9.630000</td>
+<td class="data row3 col2" id="T_37364_row3_col2">19.260000</td>
+<td class="data row3 col3" id="T_37364_row3_col3">5.122096</td>
+<td class="data row3 col4" id="T_37364_row3_col4">5.178683</td>
+<td class="data row3 col5" id="T_37364_row3_col5">10.300779</td>
+<td class="data row3 col6" id="T_37364_row3_col6">59631.020000</td>
+<td class="data row3 col7" id="T_37364_row3_col7">59631.020000</td>
+<td class="data row3 col8" id="T_37364_row3_col8">119262.040000</td>
+<td class="data row3 col9" id="T_37364_row3_col9">1.000000</td>
+<td class="data row3 col10" id="T_37364_row3_col10">1.000000</td>
 </tr>
 <tr>
-<th class="row_heading level0 row4" id="T_e281c_level0_row4">ASTRALW_GTRgamma</th>
-<td class="data row4 col0" id="T_e281c_row4_col0">9.630000</td>
-<td class="data row4 col1" id="T_e281c_row4_col1">9.630000</td>
-<td class="data row4 col2" id="T_e281c_row4_col2">19.260000</td>
-<td class="data row4 col3" id="T_e281c_row4_col3">5.117096</td>
-<td class="data row4 col4" id="T_e281c_row4_col4">5.177017</td>
-<td class="data row4 col5" id="T_e281c_row4_col5">10.294113</td>
-<td class="data row4 col6" id="T_e281c_row4_col6">59634.740000</td>
-<td class="data row4 col7" id="T_e281c_row4_col7">59634.740000</td>
-<td class="data row4 col8" id="T_e281c_row4_col8">119269.480000</td>
-<td class="data row4 col9" id="T_e281c_row4_col9">1.000000</td>
-<td class="data row4 col10" id="T_e281c_row4_col10">1.000000</td>
+<th class="row_heading level0 row4" id="T_37364_level0_row4">ASTRALW_GTRgamma</th>
+<td class="data row4 col0" id="T_37364_row4_col0">9.630000</td>
+<td class="data row4 col1" id="T_37364_row4_col1">9.630000</td>
+<td class="data row4 col2" id="T_37364_row4_col2">19.260000</td>
+<td class="data row4 col3" id="T_37364_row4_col3">5.117096</td>
+<td class="data row4 col4" id="T_37364_row4_col4">5.177017</td>
+<td class="data row4 col5" id="T_37364_row4_col5">10.294113</td>
+<td class="data row4 col6" id="T_37364_row4_col6">59634.740000</td>
+<td class="data row4 col7" id="T_37364_row4_col7">59634.740000</td>
+<td class="data row4 col8" id="T_37364_row4_col8">119269.480000</td>
+<td class="data row4 col9" id="T_37364_row4_col9">1.000000</td>
+<td class="data row4 col10" id="T_37364_row4_col10">1.000000</td>
 </tr>
 </tbody>
 </table>
@@ -8703,6 +8707,16 @@ $d_{sd, \alpha}(T, \hat{T}) = \alpha e(T, \hat{T}) + (1-\alpha) e(\hat{T}, T)$, 
 <li>Majority consensus performs very well in every "symmetric" metric (where false negatives and false positives are weighted equally, namely, <code>sd</code>, <code>std</code>, <code>symmetric_qdist</code>) when they are sufficiently resolved.</li>
 <li>When majority fails to be largely resolved, in terms of symmetric quartet distance, ASTRAL and ASTRALW performs better.<ul>
 <li>There is a very slight tendency that ASTRALW performs better than ASTRAL in case of low signals, but needs much more detailed consideration.</li>
+</ul>
+</li>
+<li>MAP with 100 sequence length performs very terrribly..<ul>
+<li>The reason is that all 1000 posterior draws often have different topologies, so MAP ends up just randomly picking one tree form posterior.<ul>
+<li>Maybe the performance improves with more draws, but it would require very large amount of computation.<ul>
+<li>Maybe test with same number of iteration without thinning? (that would produce 100 * 1000 = 100000 draws...)</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
