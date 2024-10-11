@@ -25,9 +25,9 @@
 </head>
 <body>
 
-    <h1>Profiling and Evaluation Report</h1>
+    <h1>Mammals Data: Evaluation Report</h1>
 
-    <p><strong>Date:</strong> 2024-10-09 20:32:48</p>
+    <p><strong>Date:</strong> 2024-10-11 20:38:18</p>
     <!-- <p><strong>Model:</strong> MyModel</p> -->
     <p><strong>Dataset:</strong> Mammals</p>
 
@@ -89,6 +89,16 @@
             
             <tr>
                 
+                    <td>Extended Majority</td>
+                
+                    <td>0.826417704011065</td>
+                
+                    <td>0.12224433478605899</td>
+                
+            </tr>
+            
+            <tr>
+                
                     <td>Majority</td>
                 
                     <td>0.08367911479944674</td>
@@ -121,7 +131,7 @@
     </table>
 
     <h2>Average Metrics against Randomly Resolved NCBI Tree</h2>
-    <p> The average losses against 100 randomly resolved true NCBI taxonomy.</p>
+    <p> The average normalized losses against 100 randomly resolved true NCBI taxonomy.</p>
     <table id="dynamicTable2" class="display">
         <thead>
             <tr>
@@ -144,13 +154,13 @@
                 
                     <td>MLE</td>
                 
-                    <td>0.6253125</td>
+                    <td>0.6316874999999998</td>
                 
-                    <td>0.42259757221291955</td>
+                    <td>0.42583448863067025</td>
                 
-                    <td>1.9902499999999994</td>
+                    <td>2.020968750000002</td>
                 
-                    <td>0.2748193267763819</td>
+                    <td>0.27771770779086075</td>
                 
             </tr>
             
@@ -158,13 +168,13 @@
                 
                     <td>MLE + FBP70% threshold</td>
                 
-                    <td>0.4680937499999998</td>
+                    <td>0.46825000000000006</td>
                 
-                    <td>0.4561586006836431</td>
+                    <td>0.45630484951309425</td>
                 
-                    <td>2.50846875</td>
+                    <td>2.5098125000000007</td>
                 
-                    <td>0.4696605260520972</td>
+                    <td>0.4696544018440189</td>
                 
             </tr>
             
@@ -172,13 +182,27 @@
                 
                     <td>MLE + FBP50% threshold</td>
                 
-                    <td>0.44606250000000003</td>
+                    <td>0.4452812500000001</td>
                 
-                    <td>0.41857803756487505</td>
+                    <td>0.41824212201815897</td>
                 
-                    <td>2.091124999999999</td>
+                    <td>2.0918750000000004</td>
                 
-                    <td>0.4073133973292347</td>
+                    <td>0.40729710850583084</td>
+                
+            </tr>
+            
+            <tr>
+                
+                    <td>Extended Majority</td>
+                
+                    <td>0.43090624999999994</td>
+                
+                    <td>0.33254663281387686</td>
+                
+                    <td>1.7132187499999998</td>
+                
+                    <td>0.38021924876616126</td>
                 
             </tr>
             
@@ -186,13 +210,13 @@
                 
                     <td>Majority</td>
                 
-                    <td>0.44275000000000014</td>
+                    <td>0.44178124999999985</td>
                 
-                    <td>0.41425094465099555</td>
+                    <td>0.4136718530660966</td>
                 
-                    <td>2.0844374999999995</td>
+                    <td>2.0849062500000004</td>
                 
-                    <td>0.4070825823394177</td>
+                    <td>0.40705322548093953</td>
                 
             </tr>
             
@@ -200,13 +224,13 @@
                 
                     <td>Scaled Transfer (initial tree: MLE)</td>
                 
-                    <td>0.4266249999999999</td>
+                    <td>0.429</td>
                 
-                    <td>0.334412720991191</td>
+                    <td>0.3349611820197627</td>
                 
-                    <td>1.4244375</td>
+                    <td>1.4277812499999998</td>
                 
-                    <td>0.28252824139347216</td>
+                    <td>0.2835298875114491</td>
                 
             </tr>
             
@@ -214,13 +238,13 @@
                 
                     <td>Unscaled Transfer (initial tree: MLE)</td>
                 
-                    <td>0.42534375</td>
+                    <td>0.42937500000000034</td>
                 
-                    <td>0.32915533514221224</td>
+                    <td>0.33077264711716553</td>
                 
-                    <td>1.4355312500000001</td>
+                    <td>1.4396250000000002</td>
                 
-                    <td>0.2818523726256455</td>
+                    <td>0.28295048344461515</td>
                 
             </tr>
             
@@ -266,6 +290,13 @@
         var histData = [{"name": "Internal Bipartitions in MLE + FBP50% threshold", "x": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 16, 19, 32, 55, 86, 105, 153], "y": [69, 16, 8, 5, 2, 3, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], "type": "bar"}];
         var histLayout = {"title": {"text": "Internal Bipartitions in MLE + FBP50% threshold"}, "xaxis": {"title": {"text": "Topological Depths"}}, "yaxis": {"title": {"text": "Counts"}}};
         Plotly.newPlot('MLE + FBP50% threshold', histData, histLayout);
+    </script>
+    
+    <div id="Extended Majority" class="plot-div"></div>
+    <script>
+        var histData = [{"name": "Internal Bipartitions in Extended Majority", "x": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28, 29, 30, 31, 32, 34, 39, 41, 42, 43, 48, 50, 53, 54, 55, 56, 60, 62, 65, 69, 79, 83, 84, 85, 86, 105, 121, 153, 154, 155], "y": [522, 213, 129, 72, 45, 44, 26, 23, 17, 7, 12, 4, 4, 7, 4, 8, 4, 5, 2, 4, 2, 1, 1, 1, 1, 2, 2, 1, 1, 1, 2, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1], "type": "bar"}];
+        var histLayout = {"title": {"text": "Internal Bipartitions in Extended Majority"}, "xaxis": {"title": {"text": "Topological Depths"}}, "yaxis": {"title": {"text": "Counts"}}};
+        Plotly.newPlot('Extended Majority', histData, histLayout);
     </script>
     
     <div id="Majority" class="plot-div"></div>
